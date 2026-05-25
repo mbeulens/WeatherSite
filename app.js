@@ -21,6 +21,8 @@ const REGIONS_DATABASE = [
     { id: "lyon", name: "Lyon", country: "France", lat: 45.7640, lng: 4.8357, weather: "cloudy", tempBase: 18, humidity: 64, wind: 11, pressure: 1012, uv: 4, minZoom: 5.0, forecast: [] },
     { id: "nice", name: "Nice", country: "France", lat: 43.7102, lng: 7.2620, weather: "sunny", tempBase: 22, humidity: 50, wind: 12, pressure: 1015, uv: 6, minZoom: 5.0, forecast: [] },
     { id: "bordeaux", name: "Bordeaux", country: "France", lat: 44.8378, lng: -0.5792, weather: "rainy", tempBase: 16, humidity: 76, wind: 18, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "toulouse", name: "Toulouse", country: "France", lat: 43.6047, lng: 1.4442, weather: "sunny", tempBase: 20, humidity: 55, wind: 12, pressure: 1014, uv: 5, minZoom: 5.0, forecast: [] },
+    { id: "castres", name: "Castres", country: "France", lat: 43.6076, lng: 2.2428, weather: "sunny", tempBase: 19, humidity: 58, wind: 10, pressure: 1015, uv: 5, minZoom: 5.0, forecast: [] },
     { id: "munich", name: "Munich", country: "Germany", lat: 48.1351, lng: 11.5820, weather: "cloudy", tempBase: 14, humidity: 70, wind: 10, pressure: 1011, uv: 3, minZoom: 5.0, forecast: [] },
     { id: "frankfurt", name: "Frankfurt", country: "Germany", lat: 50.1109, lng: 8.6821, weather: "cloudy", tempBase: 16, humidity: 62, wind: 12, pressure: 1013, uv: 4, minZoom: 5.0, forecast: [] },
     { id: "barcelona", name: "Barcelona", country: "Spain", lat: 41.3851, lng: 2.1734, weather: "sunny", tempBase: 22, humidity: 60, wind: 14, pressure: 1014, uv: 5, minZoom: 5.0, forecast: [] },
@@ -300,13 +302,13 @@ function initMap() {
     }).setView([20.0, 0.0], 2.8);
 
     // Apply Esri World Imagery (Satellite) tile set
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
         maxZoom: 18
     }).addTo(mapInstance);
 
     // Apply Boundaries and Labels overlay
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+    L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Labels &copy; Esri',
         maxZoom: 18
     }).addTo(mapInstance);
