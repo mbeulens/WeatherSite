@@ -4,7 +4,7 @@
 
 // 1. REGION DATA REPRESENTATION (24 major European hubs)
 const REGIONS_DATABASE = [
-    // --- EUROPE MAIN HUBS ---
+    // --- EUROPE MAIN HUBS (Tier 1 - Capitals - Zoom 1.0+) ---
     { id: "london", name: "London", country: "United Kingdom", lat: 51.7000, lng: -0.4000, weather: "rainy", tempBase: 13, humidity: 82, wind: 22, pressure: 1010, uv: 2, minZoom: 1, forecast: [] },
     { id: "paris", name: "Paris", country: "France", lat: 48.6000, lng: 2.1000, weather: "cloudy", tempBase: 17, humidity: 68, wind: 14, pressure: 1013, uv: 3, minZoom: 1, forecast: [] },
     { id: "berlin", name: "Berlin", country: "Germany", lat: 52.5200, lng: 13.4050, weather: "cloudy", tempBase: 15, humidity: 62, wind: 16, pressure: 1012, uv: 3, minZoom: 1, forecast: [] },
@@ -18,19 +18,64 @@ const REGIONS_DATABASE = [
     { id: "stockholm", name: "Stockholm", country: "Sweden", lat: 59.3293, lng: 18.0686, weather: "cloudy", tempBase: 10, humidity: 64, wind: 13, pressure: 1011, uv: 2, minZoom: 1, forecast: [] },
     { id: "moscow", name: "Moscow", country: "Russia", lat: 55.7558, lng: 37.6173, weather: "rainy", tempBase: 12, humidity: 73, wind: 15, pressure: 1009, uv: 3, minZoom: 1, forecast: [] },
 
-    // --- EUROPE REGIONAL HUBS (Zoom-dependent) ---
-    { id: "marseille", name: "Marseille", country: "France", lat: 43.2965, lng: 5.3698, weather: "sunny", tempBase: 21, humidity: 52, wind: 26, pressure: 1014, uv: 6, minZoom: 4.0, forecast: [] },
-    { id: "lyon", name: "Lyon", country: "France", lat: 45.7640, lng: 4.8357, weather: "cloudy", tempBase: 18, humidity: 64, wind: 11, pressure: 1012, uv: 4, minZoom: 4.0, forecast: [] },
-    { id: "nice", name: "Nice", country: "France", lat: 43.7102, lng: 7.2620, weather: "sunny", tempBase: 22, humidity: 50, wind: 12, pressure: 1015, uv: 6, minZoom: 4.0, forecast: [] },
-    { id: "bordeaux", name: "Bordeaux", country: "France", lat: 44.8378, lng: -0.5792, weather: "rainy", tempBase: 16, humidity: 76, wind: 18, pressure: 1010, uv: 3, minZoom: 4.0, forecast: [] },
-    { id: "toulouse", name: "Toulouse", country: "France", lat: 43.6047, lng: 1.4442, weather: "sunny", tempBase: 20, humidity: 55, wind: 12, pressure: 1014, uv: 5, minZoom: 4.0, forecast: [] },
-    { id: "castres", name: "Castres", country: "France", lat: 43.6076, lng: 2.2428, weather: "sunny", tempBase: 19, humidity: 58, wind: 10, pressure: 1015, uv: 5, minZoom: 4.0, forecast: [] },
-    { id: "munich", name: "Munich", country: "Germany", lat: 48.1351, lng: 11.5820, weather: "cloudy", tempBase: 14, humidity: 70, wind: 10, pressure: 1011, uv: 3, minZoom: 4.0, forecast: [] },
-    { id: "frankfurt", name: "Frankfurt", country: "Germany", lat: 50.1109, lng: 8.6821, weather: "cloudy", tempBase: 16, humidity: 62, wind: 12, pressure: 1013, uv: 4, minZoom: 4.0, forecast: [] },
-    { id: "barcelona", name: "Barcelona", country: "Spain", lat: 41.3851, lng: 2.1734, weather: "sunny", tempBase: 22, humidity: 60, wind: 14, pressure: 1014, uv: 5, minZoom: 4.0, forecast: [] },
-    { id: "milan", name: "Milan", country: "Italy", lat: 45.4642, lng: 9.1900, weather: "cloudy", tempBase: 19, humidity: 58, wind: 8, pressure: 1014, uv: 4, minZoom: 4.0, forecast: [] },
-    { id: "manchester", name: "Manchester", country: "United Kingdom", lat: 53.4808, lng: -2.2426, weather: "rainy", tempBase: 12, humidity: 80, wind: 24, pressure: 1008, uv: 2, minZoom: 4.0, forecast: [] },
-    { id: "edinburgh", name: "Edinburgh", country: "United Kingdom", lat: 55.9533, lng: -3.1883, weather: "rainy", tempBase: 10, humidity: 84, wind: 22, pressure: 1007, uv: 2, minZoom: 4.0, forecast: [] },
+    // --- EUROPE REGIONAL HUBS (Tier 2 - Regional - Zoom 3.5+) ---
+    { id: "marseille", name: "Marseille", country: "France", lat: 43.2965, lng: 5.3698, weather: "sunny", tempBase: 21, humidity: 52, wind: 26, pressure: 1014, uv: 6, minZoom: 3.5, forecast: [] },
+    { id: "lyon", name: "Lyon", country: "France", lat: 45.7640, lng: 4.8357, weather: "cloudy", tempBase: 18, humidity: 64, wind: 11, pressure: 1012, uv: 4, minZoom: 3.5, forecast: [] },
+    { id: "nice", name: "Nice", country: "France", lat: 43.7102, lng: 7.2620, weather: "sunny", tempBase: 22, humidity: 50, wind: 12, pressure: 1015, uv: 6, minZoom: 3.5, forecast: [] },
+    { id: "bordeaux", name: "Bordeaux", country: "France", lat: 44.8378, lng: -0.5792, weather: "rainy", tempBase: 16, humidity: 76, wind: 18, pressure: 1010, uv: 3, minZoom: 3.5, forecast: [] },
+    { id: "toulouse", name: "Toulouse", country: "France", lat: 43.6047, lng: 1.4442, weather: "sunny", tempBase: 20, humidity: 55, wind: 12, pressure: 1014, uv: 5, minZoom: 3.5, forecast: [] },
+    { id: "munich", name: "Munich", country: "Germany", lat: 48.1351, lng: 11.5820, weather: "cloudy", tempBase: 14, humidity: 70, wind: 10, pressure: 1011, uv: 3, minZoom: 3.5, forecast: [] },
+    { id: "frankfurt", name: "Frankfurt", country: "Germany", lat: 50.1109, lng: 8.6821, weather: "cloudy", tempBase: 16, humidity: 62, wind: 12, pressure: 1013, uv: 4, minZoom: 3.5, forecast: [] },
+    { id: "barcelona", name: "Barcelona", country: "Spain", lat: 41.3851, lng: 2.1734, weather: "sunny", tempBase: 22, humidity: 60, wind: 14, pressure: 1014, uv: 5, minZoom: 3.5, forecast: [] },
+    { id: "milan", name: "Milan", country: "Italy", lat: 45.4642, lng: 9.1900, weather: "cloudy", tempBase: 19, humidity: 58, wind: 8, pressure: 1014, uv: 4, minZoom: 3.5, forecast: [] },
+    { id: "manchester", name: "Manchester", country: "United Kingdom", lat: 53.4808, lng: -2.2426, weather: "rainy", tempBase: 12, humidity: 80, wind: 24, pressure: 1008, uv: 2, minZoom: 3.5, forecast: [] },
+    { id: "edinburgh", name: "Edinburgh", country: "United Kingdom", lat: 55.9533, lng: -3.1883, weather: "rainy", tempBase: 10, humidity: 84, wind: 22, pressure: 1007, uv: 2, minZoom: 3.5, forecast: [] },
+
+    // --- EUROPE LOCAL CITIES (Tier 3 - High Density - Zoom 5.0+) ---
+    // Belgium Local
+    { id: "antwerp", name: "Antwerp", country: "Belgium", lat: 51.2194, lng: 4.4025, weather: "rainy", tempBase: 13, humidity: 79, wind: 16, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "ghent", name: "Ghent", country: "Belgium", lat: 51.0543, lng: 3.7174, weather: "rainy", tempBase: 13, humidity: 81, wind: 15, pressure: 1009, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "liege", name: "Liege", country: "Belgium", lat: 50.6326, lng: 5.5797, weather: "rainy", tempBase: 12, humidity: 83, wind: 19, pressure: 1009, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "bruges", name: "Bruges", country: "Belgium", lat: 51.2093, lng: 3.2247, weather: "rainy", tempBase: 13, humidity: 82, wind: 22, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
+    // Netherlands Local
+    { id: "rotterdam", name: "Rotterdam", country: "Netherlands", lat: 51.9244, lng: 4.4777, weather: "rainy", tempBase: 13, humidity: 80, wind: 21, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "utrecht", name: "Utrecht", country: "Netherlands", lat: 52.0907, lng: 5.1214, weather: "rainy", tempBase: 13, humidity: 78, wind: 18, pressure: 1009, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "eindhoven", name: "Eindhoven", country: "Netherlands", lat: 51.4416, lng: 5.4697, weather: "cloudy", tempBase: 14, humidity: 75, wind: 14, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "thehague", name: "The Hague", country: "Netherlands", lat: 52.0705, lng: 4.3007, weather: "rainy", tempBase: 13, humidity: 81, wind: 24, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
+    // France Local
+    { id: "lille", name: "Lille", country: "France", lat: 50.6292, lng: 3.0573, weather: "rainy", tempBase: 14, humidity: 78, wind: 16, pressure: 1011, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "strasbourg", name: "Strasbourg", country: "France", lat: 48.5734, lng: 7.7521, weather: "cloudy", tempBase: 15, humidity: 70, wind: 10, pressure: 1013, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "nantes", name: "Nantes", country: "France", lat: 47.2184, lng: -1.5536, weather: "rainy", tempBase: 16, humidity: 82, wind: 18, pressure: 1012, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "montpellier", name: "Montpellier", country: "France", lat: 43.6108, lng: 3.8767, weather: "sunny", tempBase: 20, humidity: 55, wind: 15, pressure: 1014, uv: 6, minZoom: 5.0, forecast: [] },
+    { id: "rennes", name: "Rennes", country: "France", lat: 48.1173, lng: -1.6778, weather: "rainy", tempBase: 15, humidity: 80, wind: 14, pressure: 1011, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "reims", name: "Reims", country: "France", lat: 49.2583, lng: 4.0317, weather: "cloudy", tempBase: 15, humidity: 72, wind: 12, pressure: 1012, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "castres", name: "Castres", country: "France", lat: 43.6076, lng: 2.2428, weather: "sunny", tempBase: 19, humidity: 58, wind: 10, pressure: 1015, uv: 5, minZoom: 5.0, forecast: [] },
+    // Germany Local
+    { id: "hamburg", name: "Hamburg", country: "Germany", lat: 53.5511, lng: 9.9937, weather: "rainy", tempBase: 12, humidity: 80, wind: 20, pressure: 1009, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "cologne", name: "Cologne", country: "Germany", lat: 50.9375, lng: 6.9603, weather: "cloudy", tempBase: 15, humidity: 68, wind: 12, pressure: 1011, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "stuttgart", name: "Stuttgart", country: "Germany", lat: 48.7758, lng: 9.1829, weather: "cloudy", tempBase: 15, humidity: 65, wind: 10, pressure: 1013, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "dusseldorf", name: "Dusseldorf", country: "Germany", lat: 51.2271, lng: 6.7735, weather: "cloudy", tempBase: 15, humidity: 68, wind: 12, pressure: 1011, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "dresden", name: "Dresden", country: "Germany", lat: 51.0504, lng: 13.7373, weather: "cloudy", tempBase: 14, humidity: 64, wind: 10, pressure: 1012, uv: 3, minZoom: 5.0, forecast: [] },
+    // UK Local
+    { id: "birmingham", name: "Birmingham", country: "United Kingdom", lat: 52.4862, lng: -1.8904, weather: "rainy", tempBase: 12, humidity: 82, wind: 19, pressure: 1009, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "glasgow", name: "Glasgow", country: "United Kingdom", lat: 55.8642, lng: -4.2518, weather: "rainy", tempBase: 10, humidity: 86, wind: 22, pressure: 1006, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "leeds", name: "Leeds", country: "United Kingdom", lat: 53.8008, lng: -1.5491, weather: "rainy", tempBase: 11, humidity: 81, wind: 20, pressure: 1008, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "bristol", name: "Bristol", country: "United Kingdom", lat: 51.4545, lng: -2.5879, weather: "rainy", tempBase: 13, humidity: 83, wind: 18, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "belfast", name: "Belfast", country: "United Kingdom", lat: 54.5973, lng: -5.9301, weather: "rainy", tempBase: 11, humidity: 85, wind: 20, pressure: 1007, uv: 2, minZoom: 5.0, forecast: [] },
+    // Spain Local
+    { id: "seville", name: "Seville", country: "Spain", lat: 37.3891, lng: -5.9845, weather: "sunny", tempBase: 27, humidity: 28, wind: 10, pressure: 1016, uv: 8, minZoom: 5.0, forecast: [] },
+    { id: "valencia", name: "Valencia", country: "Spain", lat: 39.4699, lng: -0.3763, weather: "sunny", tempBase: 23, humidity: 55, wind: 12, pressure: 1015, uv: 6, minZoom: 5.0, forecast: [] },
+    { id: "malaga", name: "Malaga", country: "Spain", lat: 36.7213, lng: -4.4214, weather: "sunny", tempBase: 24, humidity: 50, wind: 14, pressure: 1016, uv: 7, minZoom: 5.0, forecast: [] },
+    { id: "zaragoza", name: "Zaragoza", country: "Spain", lat: 41.6488, lng: -0.8891, weather: "sunny", tempBase: 24, humidity: 38, wind: 12, pressure: 1015, uv: 6, minZoom: 5.0, forecast: [] },
+    // Italy Local
+    { id: "venice", name: "Venice", country: "Italy", lat: 45.4408, lng: 12.3155, weather: "sunny", tempBase: 20, humidity: 62, wind: 10, pressure: 1015, uv: 5, minZoom: 5.0, forecast: [] },
+    { id: "florence", name: "Florence", country: "Italy", lat: 43.7696, lng: 11.2558, weather: "sunny", tempBase: 22, humidity: 48, wind: 8, pressure: 1015, uv: 6, minZoom: 5.0, forecast: [] },
+    { id: "naples", name: "Naples", country: "Italy", lat: 40.8518, lng: 14.2681, weather: "sunny", tempBase: 23, humidity: 52, wind: 12, pressure: 1014, uv: 6, minZoom: 5.0, forecast: [] },
+    { id: "turin", name: "Turin", country: "Italy", lat: 45.0703, lng: 7.6869, weather: "cloudy", tempBase: 18, humidity: 58, wind: 8, pressure: 1014, uv: 4, minZoom: 5.0, forecast: [] },
+    // Switzerland Local
+    { id: "zurich", name: "Zurich", country: "Switzerland", lat: 47.3769, lng: 8.5417, weather: "cloudy", tempBase: 15, humidity: 65, wind: 10, pressure: 1013, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "geneva", name: "Geneva", country: "Switzerland", lat: 46.2044, lng: 6.1432, weather: "cloudy", tempBase: 16, humidity: 62, wind: 12, pressure: 1013, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "bern", name: "Bern", country: "Switzerland", lat: 46.9480, lng: 7.4474, weather: "cloudy", tempBase: 15, humidity: 64, wind: 8, pressure: 1013, uv: 4, minZoom: 5.0, forecast: [] },
 
     // --- NORTH AMERICA MAIN HUBS ---
     { id: "newyork", name: "New York", country: "United States", lat: 40.7128, lng: -74.0060, weather: "sunny", tempBase: 19, humidity: 45, wind: 16, pressure: 1016, uv: 5, minZoom: 1, forecast: [] },
@@ -39,12 +84,12 @@ const REGIONS_DATABASE = [
     { id: "toronto", name: "Toronto", country: "Canada", lat: 43.6532, lng: -79.3832, weather: "cloudy", tempBase: 12, humidity: 62, wind: 18, pressure: 1013, uv: 3, minZoom: 1, forecast: [] },
     { id: "mexicocity", name: "Mexico City", country: "Mexico", lat: 19.4326, lng: -99.1332, weather: "stormy", tempBase: 23, humidity: 50, wind: 12, pressure: 1015, uv: 9, minZoom: 1, forecast: [] },
 
-    // --- NORTH AMERICA REGIONAL HUBS (Zoom-dependent) ---
-    { id: "sanfrancisco", name: "San Francisco", country: "United States", lat: 37.7749, lng: -122.4194, weather: "cloudy", tempBase: 16, humidity: 72, wind: 20, pressure: 1013, uv: 5, minZoom: 4.0, forecast: [] },
-    { id: "miami", name: "Miami", country: "United States", lat: 25.7617, lng: -80.1918, weather: "stormy", tempBase: 28, humidity: 78, wind: 18, pressure: 1011, uv: 8, minZoom: 4.0, forecast: [] },
-    { id: "seattle", name: "Seattle", country: "United States", lat: 47.6062, lng: -122.3321, weather: "rainy", tempBase: 11, humidity: 82, wind: 14, pressure: 1009, uv: 2, minZoom: 4.0, forecast: [] },
-    { id: "boston", name: "Boston", country: "United States", lat: 42.3601, lng: -71.0589, weather: "sunny", tempBase: 17, humidity: 50, wind: 15, pressure: 1015, uv: 4, minZoom: 4.0, forecast: [] },
-    { id: "vancouver", name: "Vancouver", country: "Canada", lat: 49.2827, lng: -123.1207, weather: "rainy", tempBase: 12, humidity: 78, wind: 10, pressure: 1010, uv: 2, minZoom: 4.0, forecast: [] },
+    // --- NORTH AMERICA REGIONAL HUBS (Zoom-dependent - Zoom 3.5+) ---
+    { id: "sanfrancisco", name: "San Francisco", country: "United States", lat: 37.7749, lng: -122.4194, weather: "cloudy", tempBase: 16, humidity: 72, wind: 20, pressure: 1013, uv: 5, minZoom: 3.5, forecast: [] },
+    { id: "miami", name: "Miami", country: "United States", lat: 25.7617, lng: -80.1918, weather: "stormy", tempBase: 28, humidity: 78, wind: 18, pressure: 1011, uv: 8, minZoom: 3.5, forecast: [] },
+    { id: "seattle", name: "Seattle", country: "United States", lat: 47.6062, lng: -122.3321, weather: "rainy", tempBase: 11, humidity: 82, wind: 14, pressure: 1009, uv: 2, minZoom: 3.5, forecast: [] },
+    { id: "boston", name: "Boston", country: "United States", lat: 42.3601, lng: -71.0589, weather: "sunny", tempBase: 17, humidity: 50, wind: 15, pressure: 1015, uv: 4, minZoom: 3.5, forecast: [] },
+    { id: "vancouver", name: "Vancouver", country: "Canada", lat: 49.2827, lng: -123.1207, weather: "rainy", tempBase: 12, humidity: 78, wind: 10, pressure: 1010, uv: 2, minZoom: 3.5, forecast: [] },
 
     // --- SOUTH AMERICA ---
     { id: "rio", name: "Rio de Janeiro", country: "Brazil", lat: -22.9068, lng: -43.1729, weather: "sunny", tempBase: 27, humidity: 62, wind: 14, pressure: 1012, uv: 8, minZoom: 1, forecast: [] },
@@ -58,9 +103,9 @@ const REGIONS_DATABASE = [
     { id: "singapore", name: "Singapore", country: "Singapore", lat: 1.3521, lng: 103.8198, weather: "stormy", tempBase: 29, humidity: 78, wind: 14, pressure: 1009, uv: 8, minZoom: 1, forecast: [] },
     { id: "dubai", name: "Dubai", country: "United Arab Emirates", lat: 25.2048, lng: 55.2708, weather: "sunny", tempBase: 34, humidity: 40, wind: 18, pressure: 1012, uv: 9, minZoom: 1, forecast: [] },
 
-    // --- ASIA REGIONAL HUBS (Zoom-dependent) ---
-    { id: "osaka", name: "Osaka", country: "Japan", lat: 34.6937, lng: 135.5022, weather: "cloudy", tempBase: 19, humidity: 56, wind: 10, pressure: 1015, uv: 4, minZoom: 4.0, forecast: [] },
-    { id: "shanghai", name: "Shanghai", country: "China", lat: 31.2304, lng: 121.4737, weather: "rainy", tempBase: 20, humidity: 74, wind: 16, pressure: 1011, uv: 4, minZoom: 4.0, forecast: [] },
+    // --- ASIA REGIONAL HUBS (Zoom-dependent - Zoom 3.5+) ---
+    { id: "osaka", name: "Osaka", country: "Japan", lat: 34.6937, lng: 135.5022, weather: "cloudy", tempBase: 19, humidity: 56, wind: 10, pressure: 1015, uv: 4, minZoom: 3.5, forecast: [] },
+    { id: "shanghai", name: "Shanghai", country: "China", lat: 31.2304, lng: 121.4737, weather: "rainy", tempBase: 20, humidity: 74, wind: 16, pressure: 1011, uv: 4, minZoom: 3.5, forecast: [] },
 
     // --- AFRICA ---
     { id: "cairo", name: "Cairo", country: "Egypt", lat: 30.0444, lng: 31.2357, weather: "sunny", tempBase: 29, humidity: 38, wind: 16, pressure: 1014, uv: 8, minZoom: 1, forecast: [] },
@@ -70,7 +115,7 @@ const REGIONS_DATABASE = [
     // --- OCEANIA MAIN & REGIONAL ---
     { id: "sydney", name: "Sydney", country: "Australia", lat: -33.8688, lng: 151.2093, weather: "sunny", tempBase: 19, humidity: 58, wind: 18, pressure: 1018, uv: 5, minZoom: 1, forecast: [] },
     { id: "auckland", name: "Auckland", country: "New Zealand", lat: -36.8485, lng: 174.7633, weather: "rainy", tempBase: 15, humidity: 76, wind: 24, pressure: 1011, uv: 3, minZoom: 1, forecast: [] },
-    { id: "melbourne", name: "Melbourne", country: "Australia", lat: -37.8136, lng: 144.9631, weather: "cloudy", tempBase: 16, humidity: 62, wind: 20, pressure: 1015, uv: 4, minZoom: 4.0, forecast: [] }
+    { id: "melbourne", name: "Melbourne", country: "Australia", lat: -37.8136, lng: 144.9631, weather: "cloudy", tempBase: 16, humidity: 62, wind: 20, pressure: 1015, uv: 4, minZoom: 3.5, forecast: [] }
 ];
 
 // Helper to dynamically simulate a highly realistic 7-day weather forecast starting tomorrow
