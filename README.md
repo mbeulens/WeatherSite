@@ -41,6 +41,7 @@ A premium, highly interactive, full-screen weather map dashboard of Europe and t
 
 ## Version History
 
+- **v0.2.4**: Fixed API rate-limiting (HTTP 429) via 15-minute regional memory caching, map zoom/drag debouncing (350ms settle delay), and sequential paced request queue fetching (150ms delay).
 - **v0.2.3**: Added `localStorage` state persistence, flicker-free DOM script injection, central bootstrap element registry, and extensive developer console tracing logs.
 - **v0.2.2**: Fixed sidebar toggle button clipping by removing wrapper `overflow: hidden`.
 - **v0.2.1**: Swapped floating cards for a single collapsible left sidebar and locked time of day permanently at noon.

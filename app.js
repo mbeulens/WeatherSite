@@ -360,11 +360,11 @@ function initMap() {
     // Dynamic visibility binding and live weather fetching on zoomend / moveend
     mapInstance.on("zoomend", () => {
         updateMarkersVisibility();
-        fetchVisibleMarkersWeather();
+        debouncedFetchWeather();
     });
     
     mapInstance.on("moveend", () => {
-        fetchVisibleMarkersWeather();
+        debouncedFetchWeather();
     });
 }
 
@@ -1221,6 +1221,13 @@ function mapWeatherCode(code) {
 }
 
 async function fetchRealTimeWeather(region) {
+    // 1. Cache Check: Skip API hit if weather was successfully fetched in the last 15 minutes
+    const cacheDuration = 15 * 60 * 1000; // 15 minutes cache lifetime
+    if (region.lastFetched && (Date.now() - region.lastFetched < cacheDuration)) {
+        console.log(`[Cache Hit] ${region.name} weather is up to date (Fetched ${Math.round((Date.now() - region.lastFetched)/1000)}s ago).`);
+        return true;
+    }
+
     const marker = markersGroup[region.id];
     let markerElement = marker ? marker.getElement() : null;
     let container = markerElement ? markerElement.querySelector('.weather-marker-container') : null;
@@ -1238,6 +1245,7 @@ async function fetchRealTimeWeather(region) {
             const current = data.current_weather;
             region.tempBase = Math.round(current.temperature);
             region.weather = mapWeatherCode(current.weathercode);
+            region.lastFetched = Date.now(); // Record success timestamp
             console.log("Successfully fetched live Open-Meteo weather for:", region.name, "Temp:", region.tempBase, "Weather:", region.weather);
             region.wind = Math.round(current.windspeed);
             
@@ -1277,22 +1285,49 @@ async function fetchRealTimeWeather(region) {
     return false;
 }
 
+// Debounce controller to throttle API fetch spikes during rapid map movements
+let fetchTimeout = null;
+function debouncedFetchWeather() {
+    if (fetchTimeout) clearTimeout(fetchTimeout);
+    fetchTimeout = setTimeout(fetchVisibleMarkersWeather, 350); // 350ms settle delay
+}
+
 async function fetchVisibleMarkersWeather() {
     if (!mapInstance) return;
     const bounds = mapInstance.getBounds();
     const currentZoom = mapInstance.getZoom();
     
-    REGIONS_DATABASE.forEach(async (region) => {
+    // 1. Gather all currently visible regions that need updates (cache expired or missing)
+    const regionsToFetch = [];
+    const cacheDuration = 15 * 60 * 1000;
+    
+    REGIONS_DATABASE.forEach((region) => {
         const marker = markersGroup[region.id];
         if (marker && mapInstance.hasLayer(marker)) {
             const minZoomRequired = region.minZoom || 1;
             
-            // Only fetch weather if marker is visible on viewport and active
+            // Marker is active on viewport and within zoom levels
             if (currentZoom >= minZoomRequired && bounds.contains(marker.getLatLng())) {
-                await fetchRealTimeWeather(region);
+                const isCached = region.lastFetched && (Date.now() - region.lastFetched < cacheDuration);
+                if (!isCached) {
+                    regionsToFetch.push(region);
+                }
             }
         }
     });
+    
+    if (regionsToFetch.length === 0) {
+        console.log("[Queue] All visible markers are up-to-date in cache. Skipping API updates.");
+        return;
+    }
+    
+    console.log(`[Queue] Pacing weather fetch for ${regionsToFetch.length} visible regions...`);
+    
+    // 2. Fetch sequentially with a small pacing delay (e.g. 150ms) to respect free API rate limits
+    for (const region of regionsToFetch) {
+        await fetchRealTimeWeather(region);
+        await new Promise(resolve => setTimeout(resolve, 150));
+    }
 }
 
 // 11. GLOBAL FORECAST SLIDER CONTROLLER

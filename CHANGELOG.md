@@ -2,6 +2,11 @@
 
 All notable changes to the Aether Weather Dashboard project will be documented in this file.
 
+## [0.2.4] - 2026-05-25
+
+### Fixed
+- **Rate-Limiting (HTTP 429)**: Completely resolved Open-Meteo `Too Many Requests` errors by implementing a 15-minute regional in-memory cache, map panning/zooming request debouncing (350ms settle window), and sequential paced queue fetching (150ms delay between API hits).
+
 ## [0.2.3] - 2026-05-25
 
 ### Added
