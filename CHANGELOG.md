@@ -2,6 +2,25 @@
 
 All notable changes to the Aether Weather Dashboard project will be documented in this file.
 
+## [0.2.3] - 2026-05-25
+
+### Added
+- **Sidebar State Persistence**: Integrated `localStorage` to save and restore the sidebar's collapsed/expanded layout state across page refreshes.
+- **Synchronous Rendering Injection**: Implemented synchronous DOM inline script parsing to apply the collapsed state instantly, preventing layout flash/flicker.
+- **Robust DOM Selector Registry**: Transitioned to a centralized, static element registry populated on app bootstrap to prevent DOM timing race conditions.
+- **Developer Event Logging**: Added comprehensive browser `console.log()` tracing for API fetches, category filters, sandbox adjustments, time of day shifts, and selection events.
+
+## [0.2.2] - 2026-05-25
+
+### Fixed
+- **Toggle Button Clipping**: Resolved sidebar toggle button truncation by removing `overflow: hidden` from the main sidebar wrapper.
+
+## [0.2.1] - 2026-05-25
+
+### Added
+- **Collapsible Sidebar Layout**: Swapped floating panels for a single, fully collapsible glassmorphic left sidebar.
+- **Time Locking**: Removed the diurnal timeline matrix slider to permanently lock time of day rendering at noon for maximum map tile clarity.
+
 ## [0.2.0] - 2026-05-25
 
 ### Added
