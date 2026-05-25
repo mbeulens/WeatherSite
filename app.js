@@ -624,8 +624,8 @@ function initMap() {
         maxBoundsViscosity: 0.8
     }).setView([53.5, 12.0], 4.2);
 
-    // Apply CartoDB Dark Matter tile set
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    // Apply CartoDB Positron tile set
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
         maxZoom: 20
@@ -1160,13 +1160,13 @@ function setTimeOfDay(index) {
     const mapTiles = document.querySelectorAll(".leaflet-tile-container");
     mapTiles.forEach(tileCont => {
         if (activeClass === "morning") {
-            tileCont.style.filter = "brightness(1.15) contrast(1.1) saturate(1.1) hue-rotate(2deg)";
+            tileCont.style.filter = "brightness(1.05) contrast(0.98) saturate(1.0) sepia(0.04)";
         } else if (activeClass === "afternoon") {
-            tileCont.style.filter = "brightness(1.3) contrast(1.18) saturate(1.25) hue-rotate(2deg)";
+            tileCont.style.filter = "brightness(1.0) contrast(1.0) saturate(1.0)";
         } else if (activeClass === "evening") {
-            tileCont.style.filter = "brightness(1.2) contrast(1.15) saturate(1.3) sepia(0.15) hue-rotate(2deg)";
+            tileCont.style.filter = "brightness(0.96) contrast(0.98) saturate(1.05) sepia(0.12)";
         } else if (activeClass === "night") {
-            tileCont.style.filter = "brightness(0.95) contrast(1.25) saturate(0.8) hue-rotate(15deg)";
+            tileCont.style.filter = "brightness(0.85) contrast(1.05) saturate(0.85) hue-rotate(-5deg)";
         }
     });
 
