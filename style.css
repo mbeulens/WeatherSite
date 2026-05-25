@@ -550,7 +550,6 @@ body {
     display: flex;
     flex-direction: column;
     transition: transform var(--transition-normal), opacity var(--transition-normal);
-    overflow: hidden; /* Scroll inside scroll container instead */
     padding: 0;
     border-radius: 28px !important;
 }
