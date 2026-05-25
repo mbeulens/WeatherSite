@@ -1160,13 +1160,13 @@ function setTimeOfDay(index) {
     const mapTiles = document.querySelectorAll(".leaflet-tile-container");
     mapTiles.forEach(tileCont => {
         if (activeClass === "morning") {
-            tileCont.style.filter = "brightness(0.85) contrast(1.05) saturate(0.95)";
+            tileCont.style.filter = "brightness(1.15) contrast(1.1) saturate(1.1) hue-rotate(2deg)";
         } else if (activeClass === "afternoon") {
-            tileCont.style.filter = "none";
+            tileCont.style.filter = "brightness(1.3) contrast(1.18) saturate(1.25) hue-rotate(2deg)";
         } else if (activeClass === "evening") {
-            tileCont.style.filter = "sepia(0.25) brightness(0.75) contrast(1.1) saturate(1.15)";
+            tileCont.style.filter = "brightness(1.2) contrast(1.15) saturate(1.3) sepia(0.15) hue-rotate(2deg)";
         } else if (activeClass === "night") {
-            tileCont.style.filter = "brightness(0.48) invert(0.04) contrast(1.15) saturate(0.7)";
+            tileCont.style.filter = "brightness(0.95) contrast(1.25) saturate(0.8) hue-rotate(15deg)";
         }
     });
 
