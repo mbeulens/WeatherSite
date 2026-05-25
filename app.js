@@ -4,439 +4,118 @@
 
 // 1. REGION DATA REPRESENTATION (24 major European hubs)
 const REGIONS_DATABASE = [
-    {
-        id: "london",
-        name: "London",
-        country: "United Kingdom",
-        lat: 51.5074,
-        lng: -0.1278,
-        weather: "rainy",
-        tempBase: 13,
-        humidity: 82,
-        wind: 22,
-        pressure: 1010,
-        uv: 2,
-        forecast: [
-            { day: "Tue", weather: "rainy", tempHigh: 14, tempLow: 9 },
-            { day: "Wed", weather: "cloudy", tempHigh: 16, tempLow: 10 },
-            { day: "Thu", weather: "sunny", tempHigh: 18, tempLow: 11 }
-        ]
-    },
-    {
-        id: "paris",
-        name: "Paris",
-        country: "France",
-        lat: 48.8566,
-        lng: 2.3522,
-        weather: "cloudy",
-        tempBase: 17,
-        humidity: 68,
-        wind: 14,
-        pressure: 1013,
-        uv: 3,
-        forecast: [
-            { day: "Tue", weather: "cloudy", tempHigh: 19, tempLow: 12 },
-            { day: "Wed", weather: "sunny", tempHigh: 21, tempLow: 14 },
-            { day: "Thu", weather: "stormy", tempHigh: 20, tempLow: 13 }
-        ]
-    },
-    {
-        id: "berlin",
-        name: "Berlin",
-        country: "Germany",
-        lat: 52.5200,
-        lng: 13.4050,
-        weather: "cloudy",
-        tempBase: 15,
-        humidity: 62,
-        wind: 16,
-        pressure: 1012,
-        uv: 3,
-        forecast: [
-            { day: "Tue", weather: "cloudy", tempHigh: 17, tempLow: 9 },
-            { day: "Wed", weather: "rainy", tempHigh: 15, tempLow: 10 },
-            { day: "Thu", weather: "sunny", tempHigh: 19, tempLow: 11 }
-        ]
-    },
-    {
-        id: "madrid",
-        name: "Madrid",
-        country: "Spain",
-        lat: 40.4168,
-        lng: -3.7038,
-        weather: "sunny",
-        tempBase: 25,
-        humidity: 32,
-        wind: 10,
-        pressure: 1017,
-        uv: 7,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 27, tempLow: 16 },
-            { day: "Wed", weather: "sunny", tempHigh: 29, tempLow: 17 },
-            { day: "Thu", weather: "cloudy", tempHigh: 26, tempLow: 15 }
-        ]
-    },
-    {
-        id: "rome",
-        name: "Rome",
-        country: "Italy",
-        lat: 41.9028,
-        lng: 12.4964,
-        weather: "sunny",
-        tempBase: 22,
-        humidity: 48,
-        wind: 12,
-        pressure: 1015,
-        uv: 6,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 24, tempLow: 14 },
-            { day: "Wed", weather: "sunny", tempHigh: 25, tempLow: 15 },
-            { day: "Thu", weather: "cloudy", tempHigh: 22, tempLow: 13 }
-        ]
-    },
-    {
-        id: "athens",
-        name: "Athens",
-        country: "Greece",
-        lat: 37.9838,
-        lng: 23.7275,
-        weather: "sunny",
-        tempBase: 24,
-        humidity: 41,
-        wind: 18,
-        pressure: 1014,
-        uv: 6,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 25, tempLow: 16 },
-            { day: "Wed", weather: "sunny", tempHigh: 26, tempLow: 17 },
-            { day: "Thu", weather: "sunny", tempHigh: 27, tempLow: 18 }
-        ]
-    },
-    {
-        id: "lisbon",
-        name: "Lisbon",
-        country: "Portugal",
-        lat: 38.7223,
-        lng: -9.1393,
-        weather: "sunny",
-        tempBase: 20,
-        humidity: 58,
-        wind: 20,
-        pressure: 1016,
-        uv: 5,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 22, tempLow: 14 },
-            { day: "Wed", weather: "sunny", tempHigh: 24, tempLow: 15 },
-            { day: "Thu", weather: "cloudy", tempHigh: 21, tempLow: 13 }
-        ]
-    },
-    {
-        id: "dublin",
-        name: "Dublin",
-        country: "Ireland",
-        lat: 53.3498,
-        lng: -6.2603,
-        weather: "rainy",
-        tempBase: 11,
-        humidity: 88,
-        wind: 25,
-        pressure: 1006,
-        uv: 2,
-        forecast: [
-            { day: "Tue", weather: "rainy", tempHigh: 12, tempLow: 8 },
-            { day: "Wed", weather: "rainy", tempHigh: 11, tempLow: 7 },
-            { day: "Thu", weather: "cloudy", tempHigh: 13, tempLow: 8 }
-        ]
-    },
-    {
-        id: "brussels",
-        name: "Brussels",
-        country: "Belgium",
-        lat: 50.8503,
-        lng: 4.3517,
-        weather: "rainy",
-        tempBase: 14,
-        humidity: 80,
-        wind: 16,
-        pressure: 1011,
-        uv: 2,
-        forecast: [
-            { day: "Tue", weather: "rainy", tempHigh: 15, tempLow: 9 },
-            { day: "Wed", weather: "cloudy", tempHigh: 16, tempLow: 10 },
-            { day: "Thu", weather: "sunny", tempHigh: 18, tempLow: 11 }
-        ]
-    },
-    {
-        id: "amsterdam",
-        name: "Amsterdam",
-        country: "Netherlands",
-        lat: 52.3676,
-        lng: 4.9041,
-        weather: "rainy",
-        tempBase: 13,
-        humidity: 84,
-        wind: 21,
-        pressure: 1010,
-        uv: 2,
-        forecast: [
-            { day: "Tue", weather: "rainy", tempHigh: 14, tempLow: 8 },
-            { day: "Wed", weather: "cloudy", tempHigh: 15, tempLow: 9 },
-            { day: "Thu", weather: "sunny", tempHigh: 17, tempLow: 11 }
-        ]
-    },
-    {
-        id: "oslo",
-        name: "Oslo",
-        country: "Norway",
-        lat: 59.9139,
-        lng: 10.7522,
-        weather: "cloudy",
-        tempBase: 8,
-        humidity: 55,
-        wind: 12,
-        pressure: 1014,
-        uv: 1,
-        forecast: [
-            { day: "Tue", weather: "cloudy", tempHigh: 10, tempLow: 4 },
-            { day: "Wed", weather: "rainy", tempHigh: 8, tempLow: 3 },
-            { day: "Thu", weather: "snowy", tempHigh: 4, tempLow: -1 }
-        ]
-    },
-    {
-        id: "stockholm",
-        name: "Stockholm",
-        country: "Sweden",
-        lat: 59.3293,
-        lng: 18.0686,
-        weather: "cloudy",
-        tempBase: 10,
-        humidity: 58,
-        wind: 14,
-        pressure: 1013,
-        uv: 1,
-        forecast: [
-            { day: "Tue", weather: "cloudy", tempHigh: 11, tempLow: 5 },
-            { day: "Wed", weather: "cloudy", tempHigh: 12, tempLow: 6 },
-            { day: "Thu", weather: "rainy", tempHigh: 9, tempLow: 4 }
-        ]
-    },
-    {
-        id: "helsinki",
-        name: "Helsinki",
-        country: "Finland",
-        lat: 60.1699,
-        lng: 24.9384,
-        weather: "snowy",
-        tempBase: 3,
-        humidity: 78,
-        wind: 18,
-        pressure: 1009,
-        uv: 0,
-        forecast: [
-            { day: "Tue", weather: "snowy", tempHigh: 4, tempLow: -2 },
-            { day: "Wed", weather: "snowy", tempHigh: 2, tempLow: -4 },
-            { day: "Thu", weather: "cloudy", tempHigh: 5, tempLow: -1 }
-        ]
-    },
-    {
-        id: "copenhagen",
-        name: "Copenhagen",
-        country: "Denmark",
-        lat: 55.6761,
-        lng: 12.5683,
-        weather: "cloudy",
-        tempBase: 12,
-        humidity: 66,
-        wind: 15,
-        pressure: 1012,
-        uv: 2,
-        forecast: [
-            { day: "Tue", weather: "cloudy", tempHigh: 13, tempLow: 7 },
-            { day: "Wed", weather: "rainy", tempHigh: 11, tempLow: 6 },
-            { day: "Thu", weather: "sunny", tempHigh: 15, tempLow: 8 }
-        ]
-    },
-    {
-        id: "warsaw",
-        name: "Warsaw",
-        country: "Poland",
-        lat: 52.2297,
-        lng: 21.0122,
-        weather: "cloudy",
-        tempBase: 14,
-        humidity: 60,
-        wind: 11,
-        pressure: 1016,
-        uv: 3,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 17, tempLow: 8 },
-            { day: "Wed", weather: "cloudy", tempHigh: 15, tempLow: 7 },
-            { day: "Thu", weather: "rainy", tempHigh: 13, tempLow: 6 }
-        ]
-    },
-    {
-        id: "kyiv",
-        name: "Kyiv",
-        country: "Ukraine",
-        lat: 50.4501,
-        lng: 30.5234,
-        weather: "sunny",
-        tempBase: 16,
-        humidity: 49,
-        wind: 9,
-        pressure: 1017,
-        uv: 4,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 18, tempLow: 10 },
-            { day: "Wed", weather: "sunny", tempHigh: 20, tempLow: 11 },
-            { day: "Thu", weather: "cloudy", tempHigh: 18, tempLow: 9 }
-        ]
-    },
-    {
-        id: "vienna",
-        name: "Vienna",
-        country: "Austria",
-        lat: 48.2082,
-        lng: 16.3738,
-        weather: "sunny",
-        tempBase: 18,
-        humidity: 50,
-        wind: 10,
-        pressure: 1015,
-        uv: 4,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 20, tempLow: 11 },
-            { day: "Wed", weather: "cloudy", tempHigh: 19, tempLow: 10 },
-            { day: "Thu", weather: "stormy", tempHigh: 17, tempLow: 9 }
-        ]
-    },
-    {
-        id: "prague",
-        name: "Prague",
-        country: "Czechia",
-        lat: 50.0755,
-        lng: 14.4378,
-        weather: "cloudy",
-        tempBase: 15,
-        humidity: 63,
-        wind: 13,
-        pressure: 1014,
-        uv: 3,
-        forecast: [
-            { day: "Tue", weather: "cloudy", tempHigh: 17, tempLow: 8 },
-            { day: "Wed", weather: "sunny", tempHigh: 19, tempLow: 10 },
-            { day: "Thu", weather: "rainy", tempHigh: 14, tempLow: 7 }
-        ]
-    },
-    {
-        id: "bucharest",
-        name: "Bucharest",
-        country: "Romania",
-        lat: 44.4268,
-        lng: 26.1025,
-        weather: "sunny",
-        tempBase: 21,
-        humidity: 44,
-        wind: 8,
-        pressure: 1016,
-        uv: 5,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 23, tempLow: 12 },
-            { day: "Wed", weather: "sunny", tempHigh: 24, tempLow: 13 },
-            { day: "Thu", weather: "sunny", tempHigh: 25, tempLow: 14 }
-        ]
-    },
-    {
-        id: "budapest",
-        name: "Budapest",
-        country: "Hungary",
-        lat: 47.4979,
-        lng: 19.0402,
-        weather: "sunny",
-        tempBase: 19,
-        humidity: 47,
-        wind: 9,
-        pressure: 1015,
-        uv: 4,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 21, tempLow: 11 },
-            { day: "Wed", weather: "sunny", tempHigh: 22, tempLow: 12 },
-            { day: "Thu", weather: "cloudy", tempHigh: 19, tempLow: 10 }
-        ]
-    },
-    {
-        id: "belgrade",
-        name: "Belgrade",
-        country: "Serbia",
-        lat: 44.7872,
-        lng: 20.4573,
-        weather: "sunny",
-        tempBase: 21,
-        humidity: 43,
-        wind: 11,
-        pressure: 1015,
-        uv: 5,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 23, tempLow: 12 },
-            { day: "Wed", weather: "sunny", tempHigh: 24, tempLow: 13 },
-            { day: "Thu", weather: "sunny", tempHigh: 25, tempLow: 14 }
-        ]
-    },
-    {
-        id: "zurich",
-        name: "Zurich",
-        country: "Switzerland",
-        lat: 47.3769,
-        lng: 8.5417,
-        weather: "rainy",
-        tempBase: 13,
-        humidity: 76,
-        wind: 12,
-        pressure: 1012,
-        uv: 2,
-        forecast: [
-            { day: "Tue", weather: "rainy", tempHigh: 14, tempLow: 8 },
-            { day: "Wed", weather: "cloudy", tempHigh: 16, tempLow: 9 },
-            { day: "Thu", weather: "sunny", tempHigh: 19, tempLow: 10 }
-        ]
-    },
-    {
-        id: "reykjavik",
-        name: "Reykjavik",
-        country: "Iceland",
-        lat: 64.1466,
-        lng: -21.9426,
-        weather: "snowy",
-        tempBase: 2,
-        humidity: 79,
-        wind: 28,
-        pressure: 1001,
-        uv: 0,
-        forecast: [
-            { day: "Tue", weather: "snowy", tempHigh: 3, tempLow: -3 },
-            { day: "Wed", weather: "stormy", tempHigh: 1, tempLow: -4 },
-            { day: "Thu", weather: "snowy", tempHigh: 2, tempLow: -3 }
-        ]
-    },
-    {
-        id: "sofia",
-        name: "Sofia",
-        country: "Bulgaria",
-        lat: 42.6977,
-        lng: 23.3219,
-        weather: "sunny",
-        tempBase: 18,
-        humidity: 46,
-        wind: 9,
-        pressure: 1015,
-        uv: 4,
-        forecast: [
-            { day: "Tue", weather: "sunny", tempHigh: 20, tempLow: 9 },
-            { day: "Wed", weather: "sunny", tempHigh: 21, tempLow: 10 },
-            { day: "Thu", weather: "sunny", tempHigh: 22, tempLow: 11 }
-        ]
-    }
+    // --- EUROPE MAIN HUBS ---
+    { id: "london", name: "London", country: "United Kingdom", lat: 51.5074, lng: -0.1278, weather: "rainy", tempBase: 13, humidity: 82, wind: 22, pressure: 1010, uv: 2, minZoom: 1, forecast: [] },
+    { id: "paris", name: "Paris", country: "France", lat: 48.8566, lng: 2.3522, weather: "cloudy", tempBase: 17, humidity: 68, wind: 14, pressure: 1013, uv: 3, minZoom: 1, forecast: [] },
+    { id: "berlin", name: "Berlin", country: "Germany", lat: 52.5200, lng: 13.4050, weather: "cloudy", tempBase: 15, humidity: 62, wind: 16, pressure: 1012, uv: 3, minZoom: 1, forecast: [] },
+    { id: "madrid", name: "Madrid", country: "Spain", lat: 40.4168, lng: -3.7038, weather: "sunny", tempBase: 25, humidity: 32, wind: 10, pressure: 1017, uv: 7, minZoom: 1, forecast: [] },
+    { id: "rome", name: "Rome", country: "Italy", lat: 41.9028, lng: 12.4964, weather: "sunny", tempBase: 22, humidity: 48, wind: 12, pressure: 1015, uv: 6, minZoom: 1, forecast: [] },
+    { id: "athens", name: "Athens", country: "Greece", lat: 37.9838, lng: 23.7275, weather: "sunny", tempBase: 24, humidity: 41, wind: 18, pressure: 1014, uv: 6, minZoom: 1, forecast: [] },
+    { id: "lisbon", name: "Lisbon", country: "Portugal", lat: 38.7223, lng: -9.1393, weather: "sunny", tempBase: 20, humidity: 58, wind: 20, pressure: 1016, uv: 5, minZoom: 1, forecast: [] },
+    { id: "dublin", name: "Dublin", country: "Ireland", lat: 53.3498, lng: -6.2603, weather: "rainy", tempBase: 11, humidity: 88, wind: 25, pressure: 1006, uv: 2, minZoom: 1, forecast: [] },
+    { id: "stockholm", name: "Stockholm", country: "Sweden", lat: 59.3293, lng: 18.0686, weather: "cloudy", tempBase: 10, humidity: 64, wind: 13, pressure: 1011, uv: 2, minZoom: 1, forecast: [] },
+    { id: "moscow", name: "Moscow", country: "Russia", lat: 55.7558, lng: 37.6173, weather: "rainy", tempBase: 12, humidity: 73, wind: 15, pressure: 1009, uv: 3, minZoom: 1, forecast: [] },
+
+    // --- EUROPE REGIONAL HUBS (Zoom-dependent) ---
+    { id: "marseille", name: "Marseille", country: "France", lat: 43.2965, lng: 5.3698, weather: "sunny", tempBase: 21, humidity: 52, wind: 26, pressure: 1014, uv: 6, minZoom: 5.0, forecast: [] },
+    { id: "lyon", name: "Lyon", country: "France", lat: 45.7640, lng: 4.8357, weather: "cloudy", tempBase: 18, humidity: 64, wind: 11, pressure: 1012, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "nice", name: "Nice", country: "France", lat: 43.7102, lng: 7.2620, weather: "sunny", tempBase: 22, humidity: 50, wind: 12, pressure: 1015, uv: 6, minZoom: 5.0, forecast: [] },
+    { id: "bordeaux", name: "Bordeaux", country: "France", lat: 44.8378, lng: -0.5792, weather: "rainy", tempBase: 16, humidity: 76, wind: 18, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "munich", name: "Munich", country: "Germany", lat: 48.1351, lng: 11.5820, weather: "cloudy", tempBase: 14, humidity: 70, wind: 10, pressure: 1011, uv: 3, minZoom: 5.0, forecast: [] },
+    { id: "frankfurt", name: "Frankfurt", country: "Germany", lat: 50.1109, lng: 8.6821, weather: "cloudy", tempBase: 16, humidity: 62, wind: 12, pressure: 1013, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "barcelona", name: "Barcelona", country: "Spain", lat: 41.3851, lng: 2.1734, weather: "sunny", tempBase: 22, humidity: 60, wind: 14, pressure: 1014, uv: 5, minZoom: 5.0, forecast: [] },
+    { id: "milan", name: "Milan", country: "Italy", lat: 45.4642, lng: 9.1900, weather: "cloudy", tempBase: 19, humidity: 58, wind: 8, pressure: 1014, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "manchester", name: "Manchester", country: "United Kingdom", lat: 53.4808, lng: -2.2426, weather: "rainy", tempBase: 12, humidity: 80, wind: 24, pressure: 1008, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "edinburgh", name: "Edinburgh", country: "United Kingdom", lat: 55.9533, lng: -3.1883, weather: "rainy", tempBase: 10, humidity: 84, wind: 22, pressure: 1007, uv: 2, minZoom: 5.0, forecast: [] },
+
+    // --- NORTH AMERICA MAIN HUBS ---
+    { id: "newyork", name: "New York", country: "United States", lat: 40.7128, lng: -74.0060, weather: "sunny", tempBase: 19, humidity: 45, wind: 16, pressure: 1016, uv: 5, minZoom: 1, forecast: [] },
+    { id: "losangeles", name: "Los Angeles", country: "United States", lat: 34.0522, lng: -118.2437, weather: "sunny", tempBase: 24, humidity: 55, wind: 11, pressure: 1014, uv: 8, minZoom: 1, forecast: [] },
+    { id: "chicago", name: "Chicago", country: "United States", lat: 41.8781, lng: -87.6298, weather: "cloudy", tempBase: 14, humidity: 58, wind: 22, pressure: 1012, uv: 4, minZoom: 1, forecast: [] },
+    { id: "toronto", name: "Toronto", country: "Canada", lat: 43.6532, lng: -79.3832, weather: "cloudy", tempBase: 12, humidity: 62, wind: 18, pressure: 1013, uv: 3, minZoom: 1, forecast: [] },
+    { id: "mexicocity", name: "Mexico City", country: "Mexico", lat: 19.4326, lng: -99.1332, weather: "stormy", tempBase: 23, humidity: 50, wind: 12, pressure: 1015, uv: 9, minZoom: 1, forecast: [] },
+
+    // --- NORTH AMERICA REGIONAL HUBS (Zoom-dependent) ---
+    { id: "sanfrancisco", name: "San Francisco", country: "United States", lat: 37.7749, lng: -122.4194, weather: "cloudy", tempBase: 16, humidity: 72, wind: 20, pressure: 1013, uv: 5, minZoom: 5.0, forecast: [] },
+    { id: "miami", name: "Miami", country: "United States", lat: 25.7617, lng: -80.1918, weather: "stormy", tempBase: 28, humidity: 78, wind: 18, pressure: 1011, uv: 8, minZoom: 5.0, forecast: [] },
+    { id: "seattle", name: "Seattle", country: "United States", lat: 47.6062, lng: -122.3321, weather: "rainy", tempBase: 11, humidity: 82, wind: 14, pressure: 1009, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "boston", name: "Boston", country: "United States", lat: 42.3601, lng: -71.0589, weather: "sunny", tempBase: 17, humidity: 50, wind: 15, pressure: 1015, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "vancouver", name: "Vancouver", country: "Canada", lat: 49.2827, lng: -123.1207, weather: "rainy", tempBase: 12, humidity: 78, wind: 10, pressure: 1010, uv: 2, minZoom: 5.0, forecast: [] },
+
+    // --- SOUTH AMERICA ---
+    { id: "rio", name: "Rio de Janeiro", country: "Brazil", lat: -22.9068, lng: -43.1729, weather: "sunny", tempBase: 27, humidity: 62, wind: 14, pressure: 1012, uv: 8, minZoom: 1, forecast: [] },
+    { id: "buenosaires", name: "Buenos Aires", country: "Argentina", lat: -34.6037, lng: -58.3816, weather: "sunny", tempBase: 20, humidity: 54, wind: 16, pressure: 1016, uv: 5, minZoom: 1, forecast: [] },
+    { id: "bogota", name: "Bogota", country: "Colombia", lat: 4.7110, lng: -74.0721, weather: "rainy", tempBase: 15, humidity: 80, wind: 10, pressure: 1015, uv: 5, minZoom: 1, forecast: [] },
+
+    // --- ASIA MAIN HUBS ---
+    { id: "tokyo", name: "Tokyo", country: "Japan", lat: 35.6762, lng: 139.6503, weather: "sunny", tempBase: 18, humidity: 52, wind: 12, pressure: 1016, uv: 5, minZoom: 1, forecast: [] },
+    { id: "beijing", name: "Beijing", country: "China", lat: 39.9042, lng: 116.4074, weather: "sunny", tempBase: 22, humidity: 28, wind: 15, pressure: 1014, uv: 6, minZoom: 1, forecast: [] },
+    { id: "mumbai", name: "Mumbai", country: "India", lat: 19.0760, lng: 72.8777, weather: "rainy", tempBase: 30, humidity: 85, wind: 20, pressure: 1008, uv: 7, minZoom: 1, forecast: [] },
+    { id: "singapore", name: "Singapore", country: "Singapore", lat: 1.3521, lng: 103.8198, weather: "stormy", tempBase: 29, humidity: 78, wind: 14, pressure: 1009, uv: 8, minZoom: 1, forecast: [] },
+    { id: "dubai", name: "Dubai", country: "United Arab Emirates", lat: 25.2048, lng: 55.2708, weather: "sunny", tempBase: 34, humidity: 40, wind: 18, pressure: 1012, uv: 9, minZoom: 1, forecast: [] },
+
+    // --- ASIA REGIONAL HUBS (Zoom-dependent) ---
+    { id: "osaka", name: "Osaka", country: "Japan", lat: 34.6937, lng: 135.5022, weather: "cloudy", tempBase: 19, humidity: 56, wind: 10, pressure: 1015, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "shanghai", name: "Shanghai", country: "China", lat: 31.2304, lng: 121.4737, weather: "rainy", tempBase: 20, humidity: 74, wind: 16, pressure: 1011, uv: 4, minZoom: 5.0, forecast: [] },
+
+    // --- AFRICA ---
+    { id: "cairo", name: "Cairo", country: "Egypt", lat: 30.0444, lng: 31.2357, weather: "sunny", tempBase: 29, humidity: 38, wind: 16, pressure: 1014, uv: 8, minZoom: 1, forecast: [] },
+    { id: "johannesburg", name: "Johannesburg", country: "South Africa", lat: -26.2041, lng: 28.0473, weather: "sunny", tempBase: 17, humidity: 42, wind: 10, pressure: 1020, uv: 5, minZoom: 1, forecast: [] },
+    { id: "nairobi", name: "Nairobi", country: "Kenya", lat: -1.2921, lng: 36.8219, weather: "cloudy", tempBase: 20, humidity: 60, wind: 12, pressure: 1015, uv: 6, minZoom: 1, forecast: [] },
+
+    // --- OCEANIA MAIN & REGIONAL ---
+    { id: "sydney", name: "Sydney", country: "Australia", lat: -33.8688, lng: 151.2093, weather: "sunny", tempBase: 19, humidity: 58, wind: 18, pressure: 1018, uv: 5, minZoom: 1, forecast: [] },
+    { id: "auckland", name: "Auckland", country: "New Zealand", lat: -36.8485, lng: 174.7633, weather: "rainy", tempBase: 15, humidity: 76, wind: 24, pressure: 1011, uv: 3, minZoom: 1, forecast: [] },
+    { id: "melbourne", name: "Melbourne", country: "Australia", lat: -37.8136, lng: 144.9631, weather: "cloudy", tempBase: 16, humidity: 62, wind: 20, pressure: 1015, uv: 4, minZoom: 5.0, forecast: [] }
 ];
+
+// Helper to dynamically simulate a highly realistic 7-day weather forecast starting tomorrow
+function generateDynamicForecast(region, numDays = 7) {
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const today = new Date();
+    const forecastList = [];
+    
+    // Seed generator slightly based on region lat/lng for consistent results
+    let seed = Math.abs(Math.sin(region.lat) * Math.cos(region.lng));
+    
+    for (let i = 1; i <= numDays; i++) {
+        const nextDate = new Date(today);
+        nextDate.setDate(today.getDate() + i);
+        const dayLabel = daysOfWeek[nextDate.getDay()];
+        
+        // Organic oscillations around the regional baseline temperature
+        const factor = seed * 10 + i;
+        const tempVariation = Math.round((Math.sin(factor * 0.9) * 4) + (Math.cos(factor * 0.5) * 2));
+        const tempHigh = region.tempBase + 3 + tempVariation;
+        const tempLow = region.tempBase - 4 + Math.round(tempVariation / 1.5);
+        
+        // Logical weather progression transitions
+        let weather = region.weather;
+        const rand = Math.abs(Math.sin(factor * 7.7)); // pseudo-random deterministic-ish float 0..1
+        
+        if (i > 1 && rand > 0.35) {
+            if (region.weather === "sunny") {
+                weather = rand > 0.75 ? "cloudy" : "sunny";
+            } else if (region.weather === "rainy") {
+                weather = rand > 0.55 ? "cloudy" : (rand > 0.85 ? "stormy" : "rainy");
+            } else if (region.weather === "snowy") {
+                weather = rand > 0.65 ? "cloudy" : "snowy";
+            } else if (region.weather === "stormy") {
+                weather = rand > 0.5 ? "rainy" : "stormy";
+            } else { // cloudy
+                weather = rand > 0.65 ? "sunny" : (rand > 0.85 ? "rainy" : "cloudy");
+            }
+        }
+        
+        forecastList.push({
+            day: dayLabel,
+            weather: weather,
+            tempHigh: tempHigh,
+            tempLow: tempLow
+        });
+    }
+    return forecastList;
+}
 
 // 2. STATE MANAGEMENT
 let appState = {
@@ -610,19 +289,15 @@ function calculateGlobalStats() {
 // ==========================================================================
 
 function initMap() {
-    // Coordinate center of Europe, standard zoom
+    // Coordinate center, global zoom
     mapInstance = L.map('map', {
         zoomControl: true,
         attributionControl: true,
-        minZoom: 3.5,
-        maxZoom: 8,
+        minZoom: 2,
+        maxZoom: 18,
         zoomSnap: 0.1,
-        maxBounds: [
-            [30.0, -35.0], // Southwest boundary
-            [72.0, 45.0]  // Northeast boundary
-        ],
-        maxBoundsViscosity: 0.8
-    }).setView([53.5, 12.0], 4.2);
+        worldCopyJump: true
+    }).setView([20.0, 0.0], 2.8);
 
     // Apply Esri World Imagery (Satellite) tile set
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -648,6 +323,11 @@ function initMap() {
         if (e.originalEvent.target.closest('.weather-marker-container')) return;
         
         deselectActiveRegion();
+    });
+
+    // Dynamic visibility binding on zoomend
+    mapInstance.on("zoomend", () => {
+        updateMarkersVisibility();
     });
 }
 
@@ -677,7 +357,7 @@ function renderAllMarkers() {
             iconAnchor: [30, 22]
         });
 
-        const marker = L.marker([region.lat, region.lng], { icon: markerIcon }).addTo(mapInstance);
+        const marker = L.marker([region.lat, region.lng], { icon: markerIcon });
         
         // Save reference
         markersGroup[region.id] = marker;
@@ -689,6 +369,7 @@ function renderAllMarkers() {
         });
     });
     
+    updateMarkersVisibility();
     calculateGlobalStats();
 }
 
@@ -721,10 +402,32 @@ function updateMarkerDisplay(region) {
     }
 }
 
+function updateMarkersVisibility() {
+    const currentZoom = mapInstance ? mapInstance.getZoom() : 3;
+    REGIONS_DATABASE.forEach(region => {
+        const marker = markersGroup[region.id];
+        if (marker) {
+            const minZoomRequired = region.minZoom || 1;
+            const isFiltered = appState.activeFilter !== "all" && region.weather !== appState.activeFilter;
+            
+            if (currentZoom < minZoomRequired || isFiltered) {
+                if (mapInstance.hasLayer(marker)) {
+                    mapInstance.removeLayer(marker);
+                }
+            } else {
+                if (!mapInstance.hasLayer(marker)) {
+                    mapInstance.addLayer(marker);
+                }
+            }
+        }
+    });
+}
+
 function updateAllMarkers() {
     REGIONS_DATABASE.forEach(region => {
         updateMarkerDisplay(region);
     });
+    updateMarkersVisibility();
     calculateGlobalStats();
 }
 
@@ -1365,6 +1068,11 @@ function wireUiListeners() {
 
 // Bootstrap Aether Weather site
 document.addEventListener("DOMContentLoaded", () => {
+    // Auto-generate realistic 7-day forecasts for all regions prior to initialization
+    REGIONS_DATABASE.forEach(region => {
+        region.forecast = generateDynamicForecast(region, 7);
+    });
+
     // Init core Canvas particle engine
     initCanvasEngine();
     

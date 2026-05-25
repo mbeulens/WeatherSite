@@ -128,6 +128,19 @@ body {
     background: var(--bg-card-hover) !important;
 }
 
+/* Offset map controls to prevent overlapping with top and bottom UI bars */
+.leaflet-top {
+    top: calc(var(--header-height) + 24px) !important;
+}
+
+.leaflet-bottom {
+    bottom: 110px !important;
+}
+
+.leaflet-left {
+    left: 24px !important;
+}
+
 /* High Contrast Leaflet Map Tiles */
 .leaflet-tile-container {
     transition: filter var(--transition-slow);
