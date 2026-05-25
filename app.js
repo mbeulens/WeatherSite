@@ -253,41 +253,8 @@ const WEATHER_ICONS = {
     stormy: "fa-cloud-bolt text-stormy"
 };
 
-// UI Element selectors
-const dom = {
-    search: document.getElementById("search-input"),
-    clearSearch: document.getElementById("clear-search"),
-    searchAutocomplete: document.getElementById("search-autocomplete"),
-    filterBtns: document.querySelectorAll(".filter-btn"),
-    sidebar: document.getElementById("dashboard-sidebar"),
-    sidebarToggle: document.getElementById("sidebar-toggle"),
-    cityDetailsContainer: document.getElementById("selected-city-details"),
-    cityDetailsContent: document.querySelector(".city-details-content"),
-    emptyStateInstruction: document.querySelector(".empty-state-instruction"),
-    sideRegionName: document.getElementById("side-region-name"),
-    sideRegionCountry: document.getElementById("side-region-country"),
-    unitToggle: document.getElementById("unit-toggle"),
-    sideWeatherArt: document.getElementById("side-weather-art"),
-    sideTemp: document.getElementById("side-temperature"),
-    sideDesc: document.getElementById("side-weather-desc"),
-    metricHumidity: document.getElementById("metric-humidity"),
-    metricWind: document.getElementById("metric-wind"),
-    metricPressure: document.getElementById("metric-pressure"),
-    metricUv: document.getElementById("metric-uv"),
-    forecastList: document.getElementById("forecast-list"),
-    sandboxWeatherBtns: document.querySelectorAll(".sandbox-weather-btn"),
-    sandboxTempSlider: document.getElementById("sandbox-temp-slider"),
-    sandboxTempVal: document.getElementById("sandbox-temp-val"),
-    dateSlider: document.getElementById("date-slider"),
-    dateTicks: document.getElementById("date-ticks"),
-    currentDateLabel: document.getElementById("current-date-label"),
-    timeSlider: document.getElementById("time-slider"),
-    currentTimeLabel: document.getElementById("current-time-label"),
-    timeTicks: document.querySelectorAll(".time-ticks .tick"),
-    totalRegions: document.getElementById("total-regions-count"),
-    avgTemp: document.getElementById("avg-temp-val"),
-    skyOverlay: document.getElementById("sky-overlay")
-};
+// UI Element selectors (Populated on DOMContentLoaded)
+let dom = {};
 
 // Global variables
 let mapInstance;
@@ -507,6 +474,7 @@ function updateAllMarkers() {
 // ==========================================================================
 
 function selectRegion(region) {
+    console.log("Region selected:", region.name, "Lat:", region.lat, "Lng:", region.lng);
     const previouslySelected = appState.selectedRegion;
     appState.selectedRegion = region;
     
@@ -567,6 +535,7 @@ function deselectActiveRegion() {
     if (!appState.selectedRegion) return;
     
     const prev = appState.selectedRegion;
+    console.log("Deselected active region. Previous:", prev.name);
     appState.selectedRegion = null;
     appState.selectedForecastDay = -1;
     
@@ -959,6 +928,7 @@ function setAmbientWeather(weatherType) {
 function setTimeOfDay(index) {
     const timeClasses = ["morning", "afternoon", "evening", "night"];
     const activeClass = timeClasses[index];
+    console.log("Setting time of day index:", index, "Active class:", activeClass);
     
     appState.timeOfDay = index;
 
@@ -1069,6 +1039,7 @@ function initSearchAndFilter() {
 
             const filter = btn.dataset.filter;
             appState.activeFilter = filter;
+            console.log("Active weather category filter changed to:", filter);
             
             // Reapply fading highlights on map markers
             updateAllMarkers();
@@ -1113,6 +1084,7 @@ function initSandboxControls() {
             if (!appState.selectedRegion) return;
             
             const selectedWeather = btn.dataset.weather;
+            console.log("Sandbox weather changed for region:", appState.selectedRegion.name, "to:", selectedWeather);
             
             // Apply new state
             appState.selectedRegion.weather = selectedWeather;
@@ -1137,6 +1109,7 @@ function initSandboxControls() {
         if (!appState.selectedRegion) return;
 
         const val = parseInt(e.target.value);
+        console.log("Sandbox temp changed for region:", appState.selectedRegion.name, "to:", val);
         
         // Show in text
         dom.sandboxTempVal.innerText = `${val}°C`;
@@ -1158,13 +1131,51 @@ function initSandboxControls() {
 // ==========================================================================
 
 function wireUiListeners() {
+    const sidebarEl = document.getElementById("dashboard-sidebar");
+    const sidebarToggleEl = document.getElementById("sidebar-toggle");
+    
+    console.log("wireUiListeners executed. sidebarEl:", sidebarEl, "sidebarToggleEl:", sidebarToggleEl);
+
+    // Restore saved sidebar collapsed state on load
+    try {
+        const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+        console.log("Restored state from localStorage. isCollapsed:", isCollapsed);
+        if (isCollapsed) {
+            if (sidebarEl) sidebarEl.classList.add("collapsed");
+            const icon = sidebarToggleEl ? sidebarToggleEl.querySelector("i") : null;
+            if (icon) icon.className = "fa-solid fa-chevron-right";
+        }
+    } catch (e) {
+        console.warn("Could not restore sidebar state from localStorage:", e);
+    }
+
     // 1. Collapsible Sidebar toggle (Always clickable, collapses left sidebar out of screen)
-    dom.sidebarToggle.addEventListener("click", () => {
-        const isCollapsed = dom.sidebar.classList.toggle("collapsed");
-        dom.sidebarToggle.querySelector("i").className = isCollapsed 
-            ? "fa-solid fa-chevron-right" 
-            : "fa-solid fa-chevron-left";
-    });
+    if (sidebarToggleEl) {
+        sidebarToggleEl.addEventListener("click", () => {
+            console.log("Sidebar toggle button clicked!");
+            if (!sidebarEl) {
+                console.error("dashboard-sidebar element is missing!");
+                return;
+            }
+            const isCollapsed = sidebarEl.classList.toggle("collapsed");
+            console.log("Toggled collapsed class. New state (isCollapsed):", isCollapsed);
+            
+            const icon = sidebarToggleEl.querySelector("i");
+            if (icon) {
+                icon.className = isCollapsed 
+                    ? "fa-solid fa-chevron-right" 
+                    : "fa-solid fa-chevron-left";
+            }
+            try {
+                localStorage.setItem("sidebarCollapsed", isCollapsed);
+                console.log("Saved sidebarCollapsed to localStorage:", isCollapsed);
+            } catch (e) {
+                console.warn("Could not save sidebar state to localStorage:", e);
+            }
+        });
+    } else {
+        console.error("sidebar-toggle element is missing in the DOM!");
+    }
 
     // 2. Celsius / Fahrenheit Toggle unit converter
     dom.unitToggle.addEventListener("change", (e) => {
@@ -1227,6 +1238,7 @@ async function fetchRealTimeWeather(region) {
             const current = data.current_weather;
             region.tempBase = Math.round(current.temperature);
             region.weather = mapWeatherCode(current.weathercode);
+            console.log("Successfully fetched live Open-Meteo weather for:", region.name, "Temp:", region.tempBase, "Weather:", region.weather);
             region.wind = Math.round(current.windspeed);
             
             // Populate vital metrics mock-offsets derived from live stats
@@ -1372,7 +1384,43 @@ function initDateSlider() {
 }
 
 // Bootstrap Aether Weather site
-document.addEventListener("DOMContentLoaded", () => {
+function bootstrapApp() {
+    // Populate static DOM selectors securely once DOM is fully constructed
+    dom = {
+        search: document.getElementById("search-input"),
+        clearSearch: document.getElementById("clear-search"),
+        searchAutocomplete: document.getElementById("search-autocomplete"),
+        filterBtns: document.querySelectorAll(".filter-btn"),
+        sidebar: document.getElementById("dashboard-sidebar"),
+        sidebarToggle: document.getElementById("sidebar-toggle"),
+        cityDetailsContainer: document.getElementById("selected-city-details"),
+        cityDetailsContent: document.querySelector(".city-details-content"),
+        emptyStateInstruction: document.querySelector(".empty-state-instruction"),
+        sideRegionName: document.getElementById("side-region-name"),
+        sideRegionCountry: document.getElementById("side-region-country"),
+        unitToggle: document.getElementById("unit-toggle"),
+        sideWeatherArt: document.getElementById("side-weather-art"),
+        sideTemp: document.getElementById("side-temperature"),
+        sideDesc: document.getElementById("side-weather-desc"),
+        metricHumidity: document.getElementById("metric-humidity"),
+        metricWind: document.getElementById("metric-wind"),
+        metricPressure: document.getElementById("metric-pressure"),
+        metricUv: document.getElementById("metric-uv"),
+        forecastList: document.getElementById("forecast-list"),
+        sandboxWeatherBtns: document.querySelectorAll(".sandbox-weather-btn"),
+        sandboxTempSlider: document.getElementById("sandbox-temp-slider"),
+        sandboxTempVal: document.getElementById("sandbox-temp-val"),
+        dateSlider: document.getElementById("date-slider"),
+        dateTicks: document.getElementById("date-ticks"),
+        currentDateLabel: document.getElementById("current-date-label"),
+        timeSlider: document.getElementById("time-slider"),
+        currentTimeLabel: document.getElementById("current-time-label"),
+        timeTicks: document.querySelectorAll(".time-ticks .tick"),
+        totalRegions: document.getElementById("total-regions-count"),
+        avgTemp: document.getElementById("avg-temp-val"),
+        skyOverlay: document.getElementById("sky-overlay")
+    };
+
     // Auto-generate realistic 7-day forecasts for all regions prior to initialization
     REGIONS_DATABASE.forEach(region => {
         region.forecast = generateDynamicForecast(region, 7);
@@ -1398,4 +1446,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initial weather API fetch for all visible markers after a short rendering delay!
     setTimeout(fetchVisibleMarkersWeather, 500);
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootstrapApp);
+} else {
+    bootstrapApp();
+}
