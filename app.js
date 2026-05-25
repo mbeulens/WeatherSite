@@ -963,20 +963,26 @@ function setTimeOfDay(index) {
     appState.timeOfDay = index;
 
     // 1. Update active tick highlight styles
-    dom.timeTicks.forEach((tick, i) => {
-        if (i === index) {
-            tick.classList.add("active");
-        } else {
-            tick.classList.remove("active");
-        }
-    });
+    if (dom.timeTicks && dom.timeTicks.length > 0) {
+        dom.timeTicks.forEach((tick, i) => {
+            if (i === index) {
+                tick.classList.add("active");
+            } else {
+                tick.classList.remove("active");
+            }
+        });
+    }
 
     // 2. Adjust slider value
-    dom.timeSlider.value = index;
+    if (dom.timeSlider) {
+        dom.timeSlider.value = index;
+    }
 
     // 3. Update descriptive branding label
-    const labels = ["07:30 (Morning)", "14:00 (Afternoon)", "18:45 (Evening)", "23:15 (Night)"];
-    dom.currentTimeLabel.innerText = labels[index];
+    if (dom.currentTimeLabel) {
+        const labels = ["07:30 (Morning)", "14:00 (Afternoon)", "18:45 (Evening)", "23:15 (Night)"];
+        dom.currentTimeLabel.innerText = labels[index];
+    }
 
     // 4. Slide background sky gradients
     dom.skyOverlay.className = activeClass;
@@ -1173,17 +1179,21 @@ function wireUiListeners() {
     });
 
     // 3. Time slider actions
-    dom.timeSlider.addEventListener("input", (e) => {
-        setTimeOfDay(parseInt(e.target.value));
-    });
+    if (dom.timeSlider) {
+        dom.timeSlider.addEventListener("input", (e) => {
+            setTimeOfDay(parseInt(e.target.value));
+        });
+    }
 
     // Direct tick clicks
-    dom.timeTicks.forEach(tick => {
-        tick.addEventListener("click", () => {
-            const timeVal = parseInt(tick.dataset.time);
-            setTimeOfDay(timeVal);
+    if (dom.timeTicks && dom.timeTicks.length > 0) {
+        dom.timeTicks.forEach(tick => {
+            tick.addEventListener("click", () => {
+                const timeVal = parseInt(tick.dataset.time);
+                setTimeOfDay(timeVal);
+            });
         });
-    });
+    }
 }
 
 // 11. LIVE WEATHER API FETCHING (Open-Meteo Integration)

@@ -556,8 +556,7 @@ body {
 }
 
 .sidebar.collapsed {
-    transform: translateX(calc(-100% - 48px)); /* Slide off screen left */
-    opacity: 0;
+    transform: translateX(calc(-100% - 24px)); /* Slide off screen left, keeping toggle visible */
     pointer-events: none;
 }
 
@@ -586,6 +585,7 @@ body {
     position: absolute;
     right: -40px;
     top: 24px;
+    pointer-events: auto; /* Overrides parent pointer-events: none when collapsed */
     width: 40px;
     height: 40px;
     background: rgba(255, 255, 255, 0.75);
@@ -1334,8 +1334,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
     
     .sidebar.collapsed {
-        transform: translateX(calc(-100% - 32px));
-        opacity: 0;
+        transform: translateX(calc(-100% - 16px));
     }
     
     .sidebar-toggle-btn {
