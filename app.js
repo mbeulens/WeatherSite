@@ -13,6 +13,8 @@ const REGIONS_DATABASE = [
     { id: "athens", name: "Athens", country: "Greece", lat: 37.9838, lng: 23.7275, weather: "sunny", tempBase: 24, humidity: 41, wind: 18, pressure: 1014, uv: 6, minZoom: 1, forecast: [] },
     { id: "lisbon", name: "Lisbon", country: "Portugal", lat: 38.7223, lng: -9.1393, weather: "sunny", tempBase: 20, humidity: 58, wind: 20, pressure: 1016, uv: 5, minZoom: 1, forecast: [] },
     { id: "dublin", name: "Dublin", country: "Ireland", lat: 53.3498, lng: -6.2603, weather: "rainy", tempBase: 11, humidity: 88, wind: 25, pressure: 1006, uv: 2, minZoom: 1, forecast: [] },
+    { id: "brussels", name: "Brussels", country: "Belgium", lat: 50.8503, lng: 4.3517, weather: "rainy", tempBase: 14, humidity: 80, wind: 18, pressure: 1010, uv: 3, minZoom: 1, forecast: [] },
+    { id: "amsterdam", name: "Amsterdam", country: "Netherlands", lat: 52.3676, lng: 4.9041, weather: "rainy", tempBase: 13, humidity: 78, wind: 20, pressure: 1009, uv: 3, minZoom: 1, forecast: [] },
     { id: "stockholm", name: "Stockholm", country: "Sweden", lat: 59.3293, lng: 18.0686, weather: "cloudy", tempBase: 10, humidity: 64, wind: 13, pressure: 1011, uv: 2, minZoom: 1, forecast: [] },
     { id: "moscow", name: "Moscow", country: "Russia", lat: 55.7558, lng: 37.6173, weather: "rainy", tempBase: 12, humidity: 73, wind: 15, pressure: 1009, uv: 3, minZoom: 1, forecast: [] },
 
@@ -125,7 +127,8 @@ let appState = {
     temperatureUnit: "C",     // "C" or "F"
     timeOfDay: 1,             // 0: Morning, 1: Afternoon, 2: Evening, 3: Night
     activeFilter: "all",      // "all", "sunny", "cloudy", "rainy", "snowy"
-    tempOffsets: { 0: 0, 1: 3, 2: -2, 3: -7 } // Time of day shifts
+    tempOffsets: { 0: 0, 1: 3, 2: -2, 3: -7 }, // Time of day shifts
+    selectedForecastDay: -1   // -1 means Today, 0..6 means forecast index
 };
 
 // SVG Weather Art Templates for Sidebar hero
@@ -247,9 +250,18 @@ let particleSystem = null;
 // ==========================================================================
 
 function getAdjustedTemp(region) {
-    const base = region.tempBase;
     const offset = appState.tempOffsets[appState.timeOfDay];
-    return base + offset;
+    if (appState.selectedForecastDay !== -1 && region.forecast && region.forecast[appState.selectedForecastDay]) {
+        return region.forecast[appState.selectedForecastDay].tempHigh + offset;
+    }
+    return region.tempBase + offset;
+}
+
+function getAdjustedWeather(region) {
+    if (appState.selectedForecastDay !== -1 && region.forecast && region.forecast[appState.selectedForecastDay]) {
+        return region.forecast[appState.selectedForecastDay].weather;
+    }
+    return region.weather;
 }
 
 function convertTemp(celsius, unit = appState.temperatureUnit) {
@@ -335,12 +347,13 @@ function initMap() {
 
 function generateMarkerHtml(region) {
     const temp = getAdjustedTemp(region);
-    const iconClass = WEATHER_ICONS[region.weather];
+    const weatherState = getAdjustedWeather(region);
+    const iconClass = WEATHER_ICONS[weatherState];
     const isSelected = appState.selectedRegion && appState.selectedRegion.id === region.id;
     
     return `
-        <div class="weather-marker-container ${isSelected ? 'selected' : ''} ${region.weather}" id="marker-${region.id}">
-            <div class="weather-marker-pulse ${region.weather}"></div>
+        <div class="weather-marker-container ${isSelected ? 'selected' : ''} ${weatherState}" id="marker-${region.id}">
+            <div class="weather-marker-pulse ${weatherState}"></div>
             <div class="weather-marker-badge">
                 <i class="fa-solid ${iconClass}"></i>
                 <span class="marker-temp">${formatTempDisplay(temp)}°</span>
@@ -378,7 +391,7 @@ function renderAllMarkers() {
 function updateMarkerDisplay(region) {
     const marker = markersGroup[region.id];
     if (marker) {
-        const isFiltered = appState.activeFilter !== "all" && region.weather !== appState.activeFilter;
+        const isFiltered = appState.activeFilter !== "all" && getAdjustedWeather(region) !== appState.activeFilter;
         
         const markerIcon = L.divIcon({
             html: generateMarkerHtml(region),
@@ -410,7 +423,7 @@ function updateMarkersVisibility() {
         const marker = markersGroup[region.id];
         if (marker) {
             const minZoomRequired = region.minZoom || 1;
-            const isFiltered = appState.activeFilter !== "all" && region.weather !== appState.activeFilter;
+            const isFiltered = appState.activeFilter !== "all" && getAdjustedWeather(region) !== appState.activeFilter;
             
             if (currentZoom < minZoomRequired || isFiltered) {
                 if (mapInstance.hasLayer(marker)) {
@@ -441,6 +454,11 @@ function selectRegion(region) {
     const previouslySelected = appState.selectedRegion;
     appState.selectedRegion = region;
     
+    // Reset selected forecast day when switching cities
+    if (previouslySelected !== region) {
+        appState.selectedForecastDay = -1;
+    }
+    
     // Focus map on region with offset to prevent sidebar cover
     let focusLatLng = L.latLng(region.lat, region.lng);
     
@@ -469,8 +487,8 @@ function selectRegion(region) {
     dom.sidebar.classList.remove("collapsed");
     dom.sidebarToggle.querySelector("i").className = "fa-solid fa-chevron-right";
 
-    // Set full screen particle canvas trigger
-    setAmbientWeather(region.weather);
+    // Set full screen particle canvas trigger using dynamic forecast weather
+    setAmbientWeather(getAdjustedWeather(region));
     
     // Auto populate search box with name
     dom.search.value = region.name;
@@ -499,13 +517,18 @@ function deselectActiveRegion() {
 
 function populateSidebar(region) {
     dom.sideRegionName.innerText = region.name;
-    dom.sideRegionCountry.innerText = region.country;
+    
+    // Add date name context to the country text
+    const isForecastActive = appState.selectedForecastDay !== -1;
+    const dayName = isForecastActive ? region.forecast[appState.selectedForecastDay].day : "Today";
+    dom.sideRegionCountry.innerText = `${region.country} (${dayName})`;
     
     const currentTemp = getAdjustedTemp(region);
     dom.sideTemp.innerText = formatTempDisplay(currentTemp);
     
-    // Capitalize weather status
-    dom.sideDesc.innerText = region.weather.toUpperCase() + (region.weather === "rainy" ? " SHOWERS" : (region.weather === "sunny" ? " CONDITIONS" : " SKIES"));
+    // Capitalize weather status using dynamic weather
+    const currentWeather = getAdjustedWeather(region);
+    dom.sideDesc.innerText = currentWeather.toUpperCase() + (currentWeather === "rainy" ? " SHOWERS" : (currentWeather === "sunny" ? " CONDITIONS" : " SKIES"));
     
     // Metrics updates
     dom.metricHumidity.innerText = `${region.humidity}%`;
@@ -517,17 +540,19 @@ function populateSidebar(region) {
     else if (region.uv >= 6) uvRating = "High";
     dom.metricUv.innerText = `${region.uv} (${uvRating})`;
 
-    // Inject active SVG Animation
-    dom.sideWeatherArt.innerHTML = WEATHER_SVG_TEMPLATES[region.weather] || WEATHER_SVG_TEMPLATES.cloudy;
-    dom.sideWeatherArt.className = `weather-art ${region.weather}`;
+    // Inject active SVG Animation using dynamic weather
+    dom.sideWeatherArt.innerHTML = WEATHER_SVG_TEMPLATES[currentWeather] || WEATHER_SVG_TEMPLATES.cloudy;
+    dom.sideWeatherArt.className = `weather-art ${currentWeather}`;
 
-    // Render 3-Day Forecast items
+    // Render 7-Day Forecast items
     dom.forecastList.innerHTML = "";
     const offset = appState.tempOffsets[appState.timeOfDay];
     
-    region.forecast.forEach(f => {
+    region.forecast.forEach((f, index) => {
         const item = document.createElement("div");
-        item.className = "forecast-item";
+        const isSelected = appState.selectedForecastDay === index;
+        item.className = `forecast-item ${isSelected ? 'active-forecast-day' : ''}`;
+        item.style.cursor = "pointer";
         
         const highTemp = getForecastAdjustedTemp(f.tempHigh, offset);
         const lowTemp = getForecastAdjustedTemp(f.tempLow, offset);
@@ -543,12 +568,26 @@ function populateSidebar(region) {
                 <span class="low">${formatTempDisplay(lowTemp)}°</span>
             </div>
         `;
+        
+        // Add click listener to select/toggle the forecast day preview!
+        item.addEventListener("click", () => {
+            if (appState.selectedForecastDay === index) {
+                appState.selectedForecastDay = -1; // Toggle back to Today
+            } else {
+                appState.selectedForecastDay = index;
+            }
+            // Refresh sidebar to update highlights, and refresh all markers/ambient effects!
+            populateSidebar(region);
+            updateAllMarkers();
+            setAmbientWeather(getAdjustedWeather(region));
+        });
+        
         dom.forecastList.appendChild(item);
     });
 
-    // Sync Sandbox Controls
+    // Sync Sandbox Controls using dynamic weather
     dom.sandboxWeatherBtns.forEach(btn => {
-        if (btn.dataset.weather === region.weather) {
+        if (btn.dataset.weather === currentWeather) {
             btn.classList.add("active");
         } else {
             btn.classList.remove("active");

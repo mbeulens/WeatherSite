@@ -245,7 +245,9 @@ body {
     justify-content: space-between;
     padding: 0 24px;
     width: 100%;
-    margin-bottom: auto;
+    max-width: 1200px;
+    margin: 0 auto auto auto;
+    border-radius: 24px !important;
 }
 
 .brand {
@@ -792,6 +794,12 @@ body {
     background: rgba(0, 0, 0, 0.035);
 }
 
+.forecast-item.active-forecast-day {
+    background: rgba(37, 99, 235, 0.08) !important;
+    border-color: var(--color-accent) !important;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.15) !important;
+}
+
 .forecast-day {
     font-size: 13px;
     font-weight: 600;
@@ -954,12 +962,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .time-controller {
     width: 100%;
+    max-width: 900px;
+    margin: auto auto 0 auto;
     height: 70px;
-    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 24px;
+    border-radius: 20px !important;
 }
 
 .time-branding {
