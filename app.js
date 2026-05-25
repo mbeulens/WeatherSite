@@ -5,32 +5,32 @@
 // 1. REGION DATA REPRESENTATION (24 major European hubs)
 const REGIONS_DATABASE = [
     // --- EUROPE MAIN HUBS ---
-    { id: "london", name: "London", country: "United Kingdom", lat: 51.5074, lng: -0.1278, weather: "rainy", tempBase: 13, humidity: 82, wind: 22, pressure: 1010, uv: 2, minZoom: 1, forecast: [] },
-    { id: "paris", name: "Paris", country: "France", lat: 48.8566, lng: 2.3522, weather: "cloudy", tempBase: 17, humidity: 68, wind: 14, pressure: 1013, uv: 3, minZoom: 1, forecast: [] },
+    { id: "london", name: "London", country: "United Kingdom", lat: 51.7000, lng: -0.4000, weather: "rainy", tempBase: 13, humidity: 82, wind: 22, pressure: 1010, uv: 2, minZoom: 1, forecast: [] },
+    { id: "paris", name: "Paris", country: "France", lat: 48.6000, lng: 2.1000, weather: "cloudy", tempBase: 17, humidity: 68, wind: 14, pressure: 1013, uv: 3, minZoom: 1, forecast: [] },
     { id: "berlin", name: "Berlin", country: "Germany", lat: 52.5200, lng: 13.4050, weather: "cloudy", tempBase: 15, humidity: 62, wind: 16, pressure: 1012, uv: 3, minZoom: 1, forecast: [] },
     { id: "madrid", name: "Madrid", country: "Spain", lat: 40.4168, lng: -3.7038, weather: "sunny", tempBase: 25, humidity: 32, wind: 10, pressure: 1017, uv: 7, minZoom: 1, forecast: [] },
     { id: "rome", name: "Rome", country: "Italy", lat: 41.9028, lng: 12.4964, weather: "sunny", tempBase: 22, humidity: 48, wind: 12, pressure: 1015, uv: 6, minZoom: 1, forecast: [] },
     { id: "athens", name: "Athens", country: "Greece", lat: 37.9838, lng: 23.7275, weather: "sunny", tempBase: 24, humidity: 41, wind: 18, pressure: 1014, uv: 6, minZoom: 1, forecast: [] },
     { id: "lisbon", name: "Lisbon", country: "Portugal", lat: 38.7223, lng: -9.1393, weather: "sunny", tempBase: 20, humidity: 58, wind: 20, pressure: 1016, uv: 5, minZoom: 1, forecast: [] },
     { id: "dublin", name: "Dublin", country: "Ireland", lat: 53.3498, lng: -6.2603, weather: "rainy", tempBase: 11, humidity: 88, wind: 25, pressure: 1006, uv: 2, minZoom: 1, forecast: [] },
-    { id: "brussels", name: "Brussels", country: "Belgium", lat: 50.8503, lng: 4.3517, weather: "rainy", tempBase: 14, humidity: 80, wind: 18, pressure: 1010, uv: 3, minZoom: 1, forecast: [] },
-    { id: "amsterdam", name: "Amsterdam", country: "Netherlands", lat: 52.3676, lng: 4.9041, weather: "rainy", tempBase: 13, humidity: 78, wind: 20, pressure: 1009, uv: 3, minZoom: 1, forecast: [] },
+    { id: "brussels", name: "Brussels", country: "Belgium", lat: 50.6000, lng: 4.6000, weather: "rainy", tempBase: 14, humidity: 80, wind: 18, pressure: 1010, uv: 3, minZoom: 1, forecast: [] },
+    { id: "amsterdam", name: "Amsterdam", country: "Netherlands", lat: 52.5500, lng: 5.3000, weather: "rainy", tempBase: 13, humidity: 78, wind: 20, pressure: 1009, uv: 3, minZoom: 1, forecast: [] },
     { id: "stockholm", name: "Stockholm", country: "Sweden", lat: 59.3293, lng: 18.0686, weather: "cloudy", tempBase: 10, humidity: 64, wind: 13, pressure: 1011, uv: 2, minZoom: 1, forecast: [] },
     { id: "moscow", name: "Moscow", country: "Russia", lat: 55.7558, lng: 37.6173, weather: "rainy", tempBase: 12, humidity: 73, wind: 15, pressure: 1009, uv: 3, minZoom: 1, forecast: [] },
 
     // --- EUROPE REGIONAL HUBS (Zoom-dependent) ---
-    { id: "marseille", name: "Marseille", country: "France", lat: 43.2965, lng: 5.3698, weather: "sunny", tempBase: 21, humidity: 52, wind: 26, pressure: 1014, uv: 6, minZoom: 5.0, forecast: [] },
-    { id: "lyon", name: "Lyon", country: "France", lat: 45.7640, lng: 4.8357, weather: "cloudy", tempBase: 18, humidity: 64, wind: 11, pressure: 1012, uv: 4, minZoom: 5.0, forecast: [] },
-    { id: "nice", name: "Nice", country: "France", lat: 43.7102, lng: 7.2620, weather: "sunny", tempBase: 22, humidity: 50, wind: 12, pressure: 1015, uv: 6, minZoom: 5.0, forecast: [] },
-    { id: "bordeaux", name: "Bordeaux", country: "France", lat: 44.8378, lng: -0.5792, weather: "rainy", tempBase: 16, humidity: 76, wind: 18, pressure: 1010, uv: 3, minZoom: 5.0, forecast: [] },
-    { id: "toulouse", name: "Toulouse", country: "France", lat: 43.6047, lng: 1.4442, weather: "sunny", tempBase: 20, humidity: 55, wind: 12, pressure: 1014, uv: 5, minZoom: 5.0, forecast: [] },
-    { id: "castres", name: "Castres", country: "France", lat: 43.6076, lng: 2.2428, weather: "sunny", tempBase: 19, humidity: 58, wind: 10, pressure: 1015, uv: 5, minZoom: 5.0, forecast: [] },
-    { id: "munich", name: "Munich", country: "Germany", lat: 48.1351, lng: 11.5820, weather: "cloudy", tempBase: 14, humidity: 70, wind: 10, pressure: 1011, uv: 3, minZoom: 5.0, forecast: [] },
-    { id: "frankfurt", name: "Frankfurt", country: "Germany", lat: 50.1109, lng: 8.6821, weather: "cloudy", tempBase: 16, humidity: 62, wind: 12, pressure: 1013, uv: 4, minZoom: 5.0, forecast: [] },
-    { id: "barcelona", name: "Barcelona", country: "Spain", lat: 41.3851, lng: 2.1734, weather: "sunny", tempBase: 22, humidity: 60, wind: 14, pressure: 1014, uv: 5, minZoom: 5.0, forecast: [] },
-    { id: "milan", name: "Milan", country: "Italy", lat: 45.4642, lng: 9.1900, weather: "cloudy", tempBase: 19, humidity: 58, wind: 8, pressure: 1014, uv: 4, minZoom: 5.0, forecast: [] },
-    { id: "manchester", name: "Manchester", country: "United Kingdom", lat: 53.4808, lng: -2.2426, weather: "rainy", tempBase: 12, humidity: 80, wind: 24, pressure: 1008, uv: 2, minZoom: 5.0, forecast: [] },
-    { id: "edinburgh", name: "Edinburgh", country: "United Kingdom", lat: 55.9533, lng: -3.1883, weather: "rainy", tempBase: 10, humidity: 84, wind: 22, pressure: 1007, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "marseille", name: "Marseille", country: "France", lat: 43.2965, lng: 5.3698, weather: "sunny", tempBase: 21, humidity: 52, wind: 26, pressure: 1014, uv: 6, minZoom: 4.0, forecast: [] },
+    { id: "lyon", name: "Lyon", country: "France", lat: 45.7640, lng: 4.8357, weather: "cloudy", tempBase: 18, humidity: 64, wind: 11, pressure: 1012, uv: 4, minZoom: 4.0, forecast: [] },
+    { id: "nice", name: "Nice", country: "France", lat: 43.7102, lng: 7.2620, weather: "sunny", tempBase: 22, humidity: 50, wind: 12, pressure: 1015, uv: 6, minZoom: 4.0, forecast: [] },
+    { id: "bordeaux", name: "Bordeaux", country: "France", lat: 44.8378, lng: -0.5792, weather: "rainy", tempBase: 16, humidity: 76, wind: 18, pressure: 1010, uv: 3, minZoom: 4.0, forecast: [] },
+    { id: "toulouse", name: "Toulouse", country: "France", lat: 43.6047, lng: 1.4442, weather: "sunny", tempBase: 20, humidity: 55, wind: 12, pressure: 1014, uv: 5, minZoom: 4.0, forecast: [] },
+    { id: "castres", name: "Castres", country: "France", lat: 43.6076, lng: 2.2428, weather: "sunny", tempBase: 19, humidity: 58, wind: 10, pressure: 1015, uv: 5, minZoom: 4.0, forecast: [] },
+    { id: "munich", name: "Munich", country: "Germany", lat: 48.1351, lng: 11.5820, weather: "cloudy", tempBase: 14, humidity: 70, wind: 10, pressure: 1011, uv: 3, minZoom: 4.0, forecast: [] },
+    { id: "frankfurt", name: "Frankfurt", country: "Germany", lat: 50.1109, lng: 8.6821, weather: "cloudy", tempBase: 16, humidity: 62, wind: 12, pressure: 1013, uv: 4, minZoom: 4.0, forecast: [] },
+    { id: "barcelona", name: "Barcelona", country: "Spain", lat: 41.3851, lng: 2.1734, weather: "sunny", tempBase: 22, humidity: 60, wind: 14, pressure: 1014, uv: 5, minZoom: 4.0, forecast: [] },
+    { id: "milan", name: "Milan", country: "Italy", lat: 45.4642, lng: 9.1900, weather: "cloudy", tempBase: 19, humidity: 58, wind: 8, pressure: 1014, uv: 4, minZoom: 4.0, forecast: [] },
+    { id: "manchester", name: "Manchester", country: "United Kingdom", lat: 53.4808, lng: -2.2426, weather: "rainy", tempBase: 12, humidity: 80, wind: 24, pressure: 1008, uv: 2, minZoom: 4.0, forecast: [] },
+    { id: "edinburgh", name: "Edinburgh", country: "United Kingdom", lat: 55.9533, lng: -3.1883, weather: "rainy", tempBase: 10, humidity: 84, wind: 22, pressure: 1007, uv: 2, minZoom: 4.0, forecast: [] },
 
     // --- NORTH AMERICA MAIN HUBS ---
     { id: "newyork", name: "New York", country: "United States", lat: 40.7128, lng: -74.0060, weather: "sunny", tempBase: 19, humidity: 45, wind: 16, pressure: 1016, uv: 5, minZoom: 1, forecast: [] },
@@ -40,11 +40,11 @@ const REGIONS_DATABASE = [
     { id: "mexicocity", name: "Mexico City", country: "Mexico", lat: 19.4326, lng: -99.1332, weather: "stormy", tempBase: 23, humidity: 50, wind: 12, pressure: 1015, uv: 9, minZoom: 1, forecast: [] },
 
     // --- NORTH AMERICA REGIONAL HUBS (Zoom-dependent) ---
-    { id: "sanfrancisco", name: "San Francisco", country: "United States", lat: 37.7749, lng: -122.4194, weather: "cloudy", tempBase: 16, humidity: 72, wind: 20, pressure: 1013, uv: 5, minZoom: 5.0, forecast: [] },
-    { id: "miami", name: "Miami", country: "United States", lat: 25.7617, lng: -80.1918, weather: "stormy", tempBase: 28, humidity: 78, wind: 18, pressure: 1011, uv: 8, minZoom: 5.0, forecast: [] },
-    { id: "seattle", name: "Seattle", country: "United States", lat: 47.6062, lng: -122.3321, weather: "rainy", tempBase: 11, humidity: 82, wind: 14, pressure: 1009, uv: 2, minZoom: 5.0, forecast: [] },
-    { id: "boston", name: "Boston", country: "United States", lat: 42.3601, lng: -71.0589, weather: "sunny", tempBase: 17, humidity: 50, wind: 15, pressure: 1015, uv: 4, minZoom: 5.0, forecast: [] },
-    { id: "vancouver", name: "Vancouver", country: "Canada", lat: 49.2827, lng: -123.1207, weather: "rainy", tempBase: 12, humidity: 78, wind: 10, pressure: 1010, uv: 2, minZoom: 5.0, forecast: [] },
+    { id: "sanfrancisco", name: "San Francisco", country: "United States", lat: 37.7749, lng: -122.4194, weather: "cloudy", tempBase: 16, humidity: 72, wind: 20, pressure: 1013, uv: 5, minZoom: 4.0, forecast: [] },
+    { id: "miami", name: "Miami", country: "United States", lat: 25.7617, lng: -80.1918, weather: "stormy", tempBase: 28, humidity: 78, wind: 18, pressure: 1011, uv: 8, minZoom: 4.0, forecast: [] },
+    { id: "seattle", name: "Seattle", country: "United States", lat: 47.6062, lng: -122.3321, weather: "rainy", tempBase: 11, humidity: 82, wind: 14, pressure: 1009, uv: 2, minZoom: 4.0, forecast: [] },
+    { id: "boston", name: "Boston", country: "United States", lat: 42.3601, lng: -71.0589, weather: "sunny", tempBase: 17, humidity: 50, wind: 15, pressure: 1015, uv: 4, minZoom: 4.0, forecast: [] },
+    { id: "vancouver", name: "Vancouver", country: "Canada", lat: 49.2827, lng: -123.1207, weather: "rainy", tempBase: 12, humidity: 78, wind: 10, pressure: 1010, uv: 2, minZoom: 4.0, forecast: [] },
 
     // --- SOUTH AMERICA ---
     { id: "rio", name: "Rio de Janeiro", country: "Brazil", lat: -22.9068, lng: -43.1729, weather: "sunny", tempBase: 27, humidity: 62, wind: 14, pressure: 1012, uv: 8, minZoom: 1, forecast: [] },
@@ -59,8 +59,8 @@ const REGIONS_DATABASE = [
     { id: "dubai", name: "Dubai", country: "United Arab Emirates", lat: 25.2048, lng: 55.2708, weather: "sunny", tempBase: 34, humidity: 40, wind: 18, pressure: 1012, uv: 9, minZoom: 1, forecast: [] },
 
     // --- ASIA REGIONAL HUBS (Zoom-dependent) ---
-    { id: "osaka", name: "Osaka", country: "Japan", lat: 34.6937, lng: 135.5022, weather: "cloudy", tempBase: 19, humidity: 56, wind: 10, pressure: 1015, uv: 4, minZoom: 5.0, forecast: [] },
-    { id: "shanghai", name: "Shanghai", country: "China", lat: 31.2304, lng: 121.4737, weather: "rainy", tempBase: 20, humidity: 74, wind: 16, pressure: 1011, uv: 4, minZoom: 5.0, forecast: [] },
+    { id: "osaka", name: "Osaka", country: "Japan", lat: 34.6937, lng: 135.5022, weather: "cloudy", tempBase: 19, humidity: 56, wind: 10, pressure: 1015, uv: 4, minZoom: 4.0, forecast: [] },
+    { id: "shanghai", name: "Shanghai", country: "China", lat: 31.2304, lng: 121.4737, weather: "rainy", tempBase: 20, humidity: 74, wind: 16, pressure: 1011, uv: 4, minZoom: 4.0, forecast: [] },
 
     // --- AFRICA ---
     { id: "cairo", name: "Cairo", country: "Egypt", lat: 30.0444, lng: 31.2357, weather: "sunny", tempBase: 29, humidity: 38, wind: 16, pressure: 1014, uv: 8, minZoom: 1, forecast: [] },
@@ -70,7 +70,7 @@ const REGIONS_DATABASE = [
     // --- OCEANIA MAIN & REGIONAL ---
     { id: "sydney", name: "Sydney", country: "Australia", lat: -33.8688, lng: 151.2093, weather: "sunny", tempBase: 19, humidity: 58, wind: 18, pressure: 1018, uv: 5, minZoom: 1, forecast: [] },
     { id: "auckland", name: "Auckland", country: "New Zealand", lat: -36.8485, lng: 174.7633, weather: "rainy", tempBase: 15, humidity: 76, wind: 24, pressure: 1011, uv: 3, minZoom: 1, forecast: [] },
-    { id: "melbourne", name: "Melbourne", country: "Australia", lat: -37.8136, lng: 144.9631, weather: "cloudy", tempBase: 16, humidity: 62, wind: 20, pressure: 1015, uv: 4, minZoom: 5.0, forecast: [] }
+    { id: "melbourne", name: "Melbourne", country: "Australia", lat: -37.8136, lng: 144.9631, weather: "cloudy", tempBase: 16, humidity: 62, wind: 20, pressure: 1015, uv: 4, minZoom: 4.0, forecast: [] }
 ];
 
 // Helper to dynamically simulate a highly realistic 7-day weather forecast starting tomorrow
@@ -230,6 +230,9 @@ const dom = {
     sandboxWeatherBtns: document.querySelectorAll(".sandbox-weather-btn"),
     sandboxTempSlider: document.getElementById("sandbox-temp-slider"),
     sandboxTempVal: document.getElementById("sandbox-temp-val"),
+    dateSlider: document.getElementById("date-slider"),
+    dateTicks: document.getElementById("date-ticks"),
+    currentDateLabel: document.getElementById("current-date-label"),
     timeSlider: document.getElementById("time-slider"),
     currentTimeLabel: document.getElementById("current-time-label"),
     timeTicks: document.querySelectorAll(".time-ticks .tick"),
@@ -571,15 +574,15 @@ function populateSidebar(region) {
         
         // Add click listener to select/toggle the forecast day preview!
         item.addEventListener("click", () => {
-            if (appState.selectedForecastDay === index) {
-                appState.selectedForecastDay = -1; // Toggle back to Today
+            const newDay = appState.selectedForecastDay === index ? -1 : index;
+            if (window.setGlobalForecastDay) {
+                window.setGlobalForecastDay(newDay);
             } else {
-                appState.selectedForecastDay = index;
+                appState.selectedForecastDay = newDay;
+                populateSidebar(region);
+                updateAllMarkers();
+                setAmbientWeather(getAdjustedWeather(region));
             }
-            // Refresh sidebar to update highlights, and refresh all markers/ambient effects!
-            populateSidebar(region);
-            updateAllMarkers();
-            setAmbientWeather(getAdjustedWeather(region));
         });
         
         dom.forecastList.appendChild(item);
@@ -1107,6 +1110,94 @@ function wireUiListeners() {
     });
 }
 
+// 11. GLOBAL FORECAST SLIDER CONTROLLER
+// ==========================================================================
+
+function initDateSlider() {
+    // 1. Populate date ticks dynamically
+    dom.dateTicks.innerHTML = "";
+    
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const today = new Date();
+    
+    // Today tick
+    const todayTick = document.createElement("span");
+    todayTick.className = "date-tick active";
+    todayTick.dataset.day = "-1";
+    todayTick.innerText = "Today";
+    dom.dateTicks.appendChild(todayTick);
+    
+    // Day 1 to Day 6 ticks
+    for (let i = 0; i < 6; i++) {
+        const nextDate = new Date(today);
+        nextDate.setDate(today.getDate() + i + 1);
+        const dayLabel = daysOfWeek[nextDate.getDay()];
+        
+        const tick = document.createElement("span");
+        tick.className = "date-tick";
+        tick.dataset.day = i.toString();
+        tick.innerText = dayLabel;
+        dom.dateTicks.appendChild(tick);
+    }
+    
+    const dateTicksElements = document.querySelectorAll("#date-ticks span");
+    
+    // Helper to update Date UI globally
+    function setForecastDay(dayIndex) {
+        appState.selectedForecastDay = dayIndex;
+        dom.dateSlider.value = dayIndex;
+        
+        // Update labels
+        let dayName = "Today";
+        if (dayIndex !== -1) {
+            const nextDate = new Date(today);
+            nextDate.setDate(today.getDate() + dayIndex + 1);
+            dayName = daysOfWeek[nextDate.getDay()] + " (Forecast)";
+        }
+        dom.currentDateLabel.innerText = dayName;
+        
+        // Update ticks active states
+        dateTicksElements.forEach(tick => {
+            if (parseInt(tick.dataset.day) === dayIndex) {
+                tick.classList.add("active");
+            } else {
+                tick.classList.remove("active");
+            }
+        });
+        
+        // Refresh all markers to show the selected day's temperatures and icons!
+        updateAllMarkers();
+        
+        // Synchronize sidebar if open
+        if (appState.selectedRegion) {
+            populateSidebar(appState.selectedRegion);
+            
+            // Adjust particle canvas to match weather conditions of the selected forecast day
+            setAmbientWeather(getAdjustedWeather(appState.selectedRegion));
+        } else {
+            // Adjust particle canvas to match global weather type average
+            calculateGlobalStats(); 
+            const firstRegion = REGIONS_DATABASE[0];
+            setAmbientWeather(getAdjustedWeather(firstRegion));
+        }
+    }
+    
+    // Input listener on range slider
+    dom.dateSlider.addEventListener("input", (e) => {
+        setForecastDay(parseInt(e.target.value));
+    });
+    
+    // Direct tick clicks
+    dateTicksElements.forEach(tick => {
+        tick.addEventListener("click", () => {
+            setForecastDay(parseInt(tick.dataset.day));
+        });
+    });
+    
+    // Expose setter globally or to allow synchronization from sidebar clicks
+    window.setGlobalForecastDay = setForecastDay;
+}
+
 // Bootstrap Aether Weather site
 document.addEventListener("DOMContentLoaded", () => {
     // Auto-generate realistic 7-day forecasts for all regions prior to initialization
@@ -1122,6 +1213,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Attach listeners
     wireUiListeners();
+    initDateSlider();
     initSearchAndFilter();
     initSandboxControls();
 
